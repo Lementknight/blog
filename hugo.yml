@@ -2,3 +2,29 @@ baseURL: https://lementknight.github.io/
 languageCode: en-us
 title: My Blog
 theme: PaperMod
+
+
+params:
+  profileMode:
+    enabled: true
+    title: "<Title>" # optional default will be site title
+    subtitle: "Welcome to my website 👋" # optional
+    imageUrl: "./images/profile.jpg" # optional
+    imageTitle: "<title of image as alt>" # optional
+    imageWidth: 200 # custom size
+    imageHeight: 200 # custom size
+    buttons:
+      - name: Archive
+        url: "/archive"
+      - name: About Me
+        url: "/aboutMe"
+      - name: Github
+        url: "https://github.com/"
+
+  socialIcons: # optional
+    - name: "Github"
+      url: "https://github.com/Lementknight"
+    - name: "Linktree"
+      url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
+    - name: "Spotify"
+      url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
