@@ -18,8 +18,6 @@ params:
         url: "/archive"
       - name: About Me
         url: "/aboutMe"
-      - name: Blog
-        url: "/blog
       - name: Github
         url: "https://github.com/Lementknight"
 
