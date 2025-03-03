@@ -15,9 +15,9 @@ params:
     imageHeight: 200 # custom size
     buttons:
       - name: Archive
-        url: "archives/"
+        url: "archive"
       - name: About Me
-        url: "aboutMe/"
+        url: "aboutMe"
       - name: Posts
         url: "posts/"
 
