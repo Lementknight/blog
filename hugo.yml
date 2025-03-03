@@ -15,15 +15,13 @@ params:
     imageHeight: 200 # custom size
     buttons:
       - name: Archive
-        url: "/archives"
+        url: "archives/"
       - name: About Me
-        url: "/aboutMe"
-      - name: Github
-        url: "https://github.com/Lementknight"
+        url: "aboutMe/"
+      - name: Posts
+        url: "posts/"
 
   socialIcons: # optional
-    - name: "Github"
-      url: "https://github.com/Lementknight"
     - name: "Linktree"
       url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
     - name: "Spotify"
