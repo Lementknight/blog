@@ -17,7 +17,7 @@ params:
       - name: Archive
         url: "archive"
       - name: About Me
-        url: "aboutMe"
+        url: "aboutme"
       - name: Posts
         url: "posts/"
 
