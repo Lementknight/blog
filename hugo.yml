@@ -1,7 +1,8 @@
 baseURL: https://calebaguirreleon.com/
 languageCode: en-us
-title: My Blog
+title: Caleb Aguirre-Leon
 theme: PaperMod
+description: "Caleb Aguirre-Leon's website"
 
 
 params:
@@ -13,16 +14,25 @@ params:
     imageTitle: "A picture of a guy with curly hair looking over to his left with a brick background" # optional
     imageWidth: 200 # custom size
     imageHeight: 200 # custom size
-    buttons:
-      - name: Archive
-        url: "archive"
-      - name: About Me
-        url: "aboutme"
-      - name: Posts
-        url: "posts/"
 
   socialIcons: # optional
-    - name: "Linktree"
-      url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
+    - name: "GitHub"
+      url: "https://github.com/Lementknight"
     - name: "Spotify"
       url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
+    - name: "email"
+      url: "mailto:calebaguirreleon@gmail.com"
+
+menu:
+  main:
+    - name: Archive
+      url: /archive/
+      weight: 3
+    - identifier: About Me
+      name: About Me
+      url: /aboutme/
+      weight: 1
+    - identifier: Blog
+      name: Blog
+      url: /posts/
+      weight: 2
