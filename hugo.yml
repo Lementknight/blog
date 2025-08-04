@@ -7,6 +7,13 @@ description: "Caleb Aguirre-Leon's website"
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
+# Image processing for consistent GitHub Pages rendering
+imaging:
+  quality: 90
+  resampleFilter: "lanczos"
+  anchor: "smart"
+
+
 params:
   profileMode:
     enabled: true
@@ -14,8 +21,8 @@ params:
     subtitle: "Welcome to my website 👋" # optional
     imageUrl: "./images/profile.jpg" # optional
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
-    imageWidth: 300 # custom size
-    imageHeight: 300 # custom size
+    imageWidth: 400 # custom size
+    imageHeight: 400 # custom size
 
   socialIcons: # optional
     - name: "GitHub"

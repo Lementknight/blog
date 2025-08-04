@@ -1,8 +1,16 @@
-/* Custom CSS to fix profile image centering and stretching */
+/* Optimized CSS for consistent profile image rendering across platforms */
 .profile img {
     object-fit: cover !important;
     object-position: 80% center !important;
-    width: 300px !important;
-    height: 300px !important;
+    width: 400px !important;
+    height: 400px !important;
     border-radius: 50% !important;
+    /* Enhanced cross-platform consistency */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: optimize-contrast;
+    /* Fallback for older browsers */
+    -ms-interpolation-mode: bicubic;
+    /* Prevent layout shifts */
+    display: block;
 }
