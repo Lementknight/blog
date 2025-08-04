@@ -1,8 +1,9 @@
 /* Optimized CSS for consistent profile image rendering across platforms */
 .profile img {
-    object-fit: contain !important;
-    width: 300px !important;
-    height: 300px !important;
+    object-fit: cover !important;
+    object-position: 80% center !important;
+    width: 400px !important;
+    height: 400px !important;
     border-radius: 50% !important;
     /* Enhanced cross-platform consistency */
     image-rendering: -webkit-optimize-contrast;
