@@ -11,9 +11,9 @@ params:
     title: "<Title>" # optional default will be site title
     subtitle: "Welcome to my website 👋" # optional
     imageUrl: "./images/profile.jpg" # optional
-    imageTitle: "A picture of a guy with curly hair looking over to his left with a brick background" # optional
-    imageWidth: 200 # custom size
-    imageHeight: 200 # custom size
+    imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
+    imageWidth: 300 # custom size
+    imageHeight: 300 # custom size
 
   socialIcons: # optional
     - name: "GitHub"
