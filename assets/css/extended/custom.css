@@ -1,0 +1,8 @@
+/* Custom CSS to fix profile image centering and stretching */
+.profile img {
+    object-fit: cover !important;
+    object-position: 80% center !important;
+    width: 300px !important;
+    height: 300px !important;
+    border-radius: 50% !important;
+}
