@@ -1,5 +1,5 @@
 /* CRITICAL: Profile image fix - maximum specificity */
-/* Updated: 2025-08-04 16:01 - Force cache refresh */
+/* Updated: 2025-08-04 16:27 - Override mobile transform and theme CSS */
 .profile img,
 .profile .profile_inner img,
 img[src*="profile"],
@@ -15,4 +15,21 @@ img[alt*="Caleb"] {
     max-height: 400px !important;
     min-width: 400px !important;
     min-height: 400px !important;
+    /* Override mobile scaling that interferes with positioning */
+    transform: none !important;
+}
+
+/* Ensure positioning works on all screen sizes */
+@media screen and (max-width: 768px) {
+    .profile img,
+    .profile .profile_inner img,
+    img[src*="profile"],
+    img[src*="profile_hu"],
+    img[alt*="Caleb"] {
+        object-fit: cover !important;
+        object-position: 90% center !important;
+        width: 400px !important;
+        height: 400px !important;
+        transform: none !important;
+    }
 }
