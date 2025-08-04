@@ -6,7 +6,7 @@ img[src*="profile"],
 img[src*="profile_hu"],
 img[alt*="Caleb"] {
     object-fit: cover !important;
-    object-position: 80% center !important;
+    object-position: 90% center !important;
     width: 400px !important;
     height: 400px !important;
     border-radius: 50% !important;
