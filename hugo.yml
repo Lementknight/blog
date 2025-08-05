@@ -7,11 +7,19 @@ description: "Caleb Aguirre-Leon's website"
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
-# Image processing for consistent GitHub Pages rendering
+# Image processing for high-quality output
 imaging:
-  quality: 90
-  resampleFilter: "lanczos"
+  quality: 95              # Increased from 90 for better quality
+  resampleFilter: "lanczos" # Best quality resampling
   anchor: "smart"
+  # Additional format settings for better compression
+  formats:
+    - webp              # Modern format with better compression
+    - jpg               # Fallback format
+  # Ensure high quality for profile images
+  exif:
+    includeFields: ""   # Remove EXIF data to reduce file size
+    excludeFields: "GPS.*"
 
 
 params:

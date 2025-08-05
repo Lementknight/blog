@@ -1,0 +1,62 @@
+{{/* Override PaperMod profile image template for better quality */}}
+{{- if .Site.Params.profileMode.enabled -}}
+{{- with .Site.Params.profileMode.imageUrl -}}
+{{- $image := resources.Get (strings.TrimPrefix "/" .) -}}
+{{- if $image -}}
+  {{/* Generate high-quality responsive images */}}
+  {{- $img300 := $image.Resize "300x300 q95 lanczos" -}}
+  {{- $img600 := $image.Resize "600x600 q95 lanczos" -}}
+  
+  {{/* Generate WebP versions */}}
+  {{- $img300webp := $img300.Process "webp q95" -}}
+  {{- $img600webp := $img600.Process "webp q95" -}}
+  
+  <div class="profile_container">
+    <div class="profile">
+      {{- with $.Site.Params.profileMode.imageTitle }}
+      <picture>
+        <source 
+          srcset="{{ $img300webp.RelPermalink }} 1x, {{ $img600webp.RelPermalink }} 2x" 
+          type="image/webp"
+        >
+        <source 
+          srcset="{{ $img300.RelPermalink }} 1x, {{ $img600.RelPermalink }} 2x" 
+          type="image/jpeg"
+        >
+        <img 
+          draggable="false" 
+          src="{{ $img300.RelPermalink }}" 
+          alt="{{ . }}" 
+          title="{{ . }}"
+          loading="eager"
+          width="300"
+          height="300"
+          style="image-rendering: -webkit-optimize-contrast; image-rendering: optimize-contrast;"
+        />
+      </picture>
+      {{- else }}
+      <picture>
+        <source 
+          srcset="{{ $img300webp.RelPermalink }} 1x, {{ $img600webp.RelPermalink }} 2x" 
+          type="image/webp"
+        >
+        <source 
+          srcset="{{ $img300.RelPermalink }} 1x, {{ $img600.RelPermalink }} 2x" 
+          type="image/jpeg"
+        >
+        <img 
+          draggable="false" 
+          src="{{ $img300.RelPermalink }}" 
+          alt="{{ $.Site.Params.profileMode.title | default $.Site.Title }}" 
+          loading="eager"
+          width="300"
+          height="300"
+          style="image-rendering: -webkit-optimize-contrast; image-rendering: optimize-contrast;"
+        />
+      </picture>
+      {{- end }}
+    </div>
+  </div>
+{{- end -}}
+{{- end -}}
+{{- end -}}
