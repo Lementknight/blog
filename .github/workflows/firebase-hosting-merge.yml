@@ -23,7 +23,6 @@ jobs:
       
       - name: Build Hugo site
         run: hugo \
-            --gc \
             --minify \
             --baseURL "${{ secrets.BASE_URL }}/"
       
