@@ -19,7 +19,7 @@ params:
     enabled: true
     title: "<Title>" # optional default will be site title
     subtitle: "Welcome to my website 👋" # optional
-    imageUrl: "./images/profile.jpg" # optional
+    imageUrl: "/images/profile.jpg" # optional
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
     imageWidth: 300 # custom size
     imageHeight: 300 # custom size
