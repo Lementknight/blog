@@ -7,14 +7,14 @@ img[src*="profile_hu"],
 img[alt*="Caleb"] {
     object-fit: cover !important;
     object-position: 90% center !important;
-    width: 400px !important;
-    height: 400px !important;
+    width: 300px !important;
+    height: 300px !important;
     border-radius: 50% !important;
     /* Force dimensions override any theme constraints */
-    max-width: 400px !important;
-    max-height: 400px !important;
-    min-width: 400px !important;
-    min-height: 400px !important;
+    max-width: 300px !important;
+    max-height: 300px !important;
+    min-width: 300px !important;
+    min-height: 300px !important;
     /* Override mobile scaling that interferes with positioning */
     transform: none !important;
 }
@@ -28,8 +28,8 @@ img[alt*="Caleb"] {
     img[alt*="Caleb"] {
         object-fit: cover !important;
         object-position: 90% center !important;
-        width: 400px !important;
-        height: 400px !important;
+        width: 300px !important;
+        height: 300px !important;
         transform: none !important;
     }
 }
