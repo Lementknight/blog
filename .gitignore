@@ -20,3 +20,7 @@ hugo.linux
 
 # Static Website
 .github/workflows/public/*
+
+# Firebase
+.firebase/*
+.firebaserc
