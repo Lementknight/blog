@@ -7,9 +7,9 @@ description: "Caleb Aguirre-Leon's website"
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
-# Image processing for high-quality output
+# Image processing for highest quality output
 imaging:
-  quality: 95              # High quality (default is ~75%)
+  quality: 99              # Maximum quality (99% is the highest supported)
   resampleFilter: "lanczos" # Best quality resampling
   anchor: "smart"
   # Additional format settings for better compression
@@ -22,11 +22,14 @@ imaging:
     excludeFields: "GPS.*"
 
 params:
+  # Uncomment to completely disable image processing
+  bypassImageProcessing: true
+  
   profileMode:
     enabled: true
     title: "<Title>" # optional default will be site title
     subtitle: "Welcome to my website 👋" # optional
-    imageUrl: "/images/profile.jpeg" # optional
+    imageUrl: "/images/profile.jpeg" # Static image - no compression
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
     imageWidth: 300 # custom size
     imageHeight: 200 # custom size
