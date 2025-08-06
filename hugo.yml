@@ -9,7 +9,7 @@ ignoreLogs: ['warning-goldmark-raw-html']
 
 # Image processing for high-quality output
 imaging:
-  quality: 95              # Increased from 90 for better quality
+  quality: 95              # High quality (default is ~75%)
   resampleFilter: "lanczos" # Best quality resampling
   anchor: "smart"
   # Additional format settings for better compression
@@ -21,7 +21,6 @@ imaging:
     includeFields: ""   # Remove EXIF data to reduce file size
     excludeFields: "GPS.*"
 
-
 params:
   profileMode:
     enabled: true
@@ -29,8 +28,8 @@ params:
     subtitle: "Welcome to my website 👋" # optional
     imageUrl: "/images/profile.jpg" # optional
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
-    # imageWidth: 300 # custom size
-    # imageHeight: 300 # custom size
+    imageWidth: 300 # custom size
+    imageHeight: 200 # custom size
 
   socialIcons: # optional
     - name: "GitHub"
