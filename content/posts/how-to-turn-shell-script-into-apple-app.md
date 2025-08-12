@@ -1,12 +1,12 @@
 ---
 title: "How to Turn a Shell Script into an Apple App"
 tags: ["shell-script", "macos", "app-development"]
-date: 2025-03-17T10:48:29+02:00
+date: 2025-08-12T12:00:00-05:00
 description: "Tutorial on how to convert a shell script into a macOS application."
-draft: true
+draft: false
 ---
 
-Recently I downloaded Balatro on my Macbook Pro and I wanted to play mods on it, but to play mods on it I had to run a shell script. I didn't want to navigate to the directory and run the script every time I wanted to play, so I decided to turn the command that I had to run into an Apple app. This is how I did it.
+Recently I downloaded [Balatro](https://www.playbalatro.com/) on my Macbook Pro and I wanted to play mods on it, but to play mods on it I had to run a shell script. I didn't want to navigate to the directory on my terminal and run the script every time I wanted to play, so I decided to turn the command that I had to run into an Apple app. This is how I did it.
 
 ## Step 1: Create the Shell Script
 
@@ -19,8 +19,6 @@ play_modded_balatro.sh
 cd "path/to/your/balatro/mods"
 ./balatro_mod_script.sh
 ```
-
-> **_NOTE:_** You can replace the contents of the script with whatever shell commands you would like to run.
 
 ## Step 2: Make the Script Executable
 
@@ -50,11 +48,48 @@ App_Name.app/
 
 
 ## Step 3: Create the Directory Structure
-Open your terminal and navigate to the directory where you want to create your app. Then run the following commands to create the necessary directories:
+Open your terminal and navigate to the `Applications` directory. Then run the following commands to create the necessary directories:
 
 ```bash
+cd ~
+cd ../../Applications # Navigate to the Applications directory
 mkdir -p App_Name.app/Contents/MacOS # Creates the directory structure for the app
 touch App_Name.app/Contents/Info.plist # Creates the Info.plist file
-cp play_modded_balatro.sh App_Name.app/Contents/MacOS/ # Copies the shell script to the MacOS directory
+cp <path_to_your_shell_script> App_Name.app/Contents/MacOS/ # Copies the shell script to the MacOS directory
 ```
 
+> [!NOTE]
+> You want to place the app in the `Applications` directory so that it can be easily accessed and launched like any other application on your Mac.
+
+## Step 4: Edit the Info.plist File
+Now you need to edit the `Info.plist` file to provide the necessary metadata for your application. Open the `Info.plist` file in a text editor and add the following content:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>App_Name</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.App_Name</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>LSArchitecturePriority</key>
+    <string>arm64</string>
+</dict>
+</plist>
+```
+> [!NOTE]
+> Replace `LSArchitecturePriority` is set to `arm64` since my the mod for Balatro needs to run on the Apple Silicon architecture (not with Rosetta 2). You can read more about the `Info.plist` file [here](https://developer.apple.com/documentation/bundleresources/information-property-list).
+
+
+## Step 5: Run the Application
+Now that you have created the app structure and edited the `Info.plist` file, you can run your application. Open Finder, navigate to the `Applications` directory, and double-click on `App_Name.app`. 
+
+
+References:
+- [Converting a Shell Script Into a *.app File](https://stackoverflow.com/questions/30792569/converting-a-shell-script-into-a-app-file#:~:text=Where%20the%20file,MyScript)
+- [The Importance of Info.plist in iOS Development](https://medium.com/@kalidoss.shanmugam/the-importance-of-info-plist-in-ios-development-fa76c238a243)

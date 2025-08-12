@@ -28,7 +28,7 @@ params:
   profileMode:
     enabled: true
     title: "<Title>" # optional default will be site title
-    subtitle: "Welcome to my website 👋" # optional
+    subtitle: "Welcome to my website 👋  \n Below you can find links to my GitHub Page, my personal music, and my email"
     imageUrl: "/images/profile.jpeg" # Static image - no compression
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
     imageWidth: 300 # custom size
