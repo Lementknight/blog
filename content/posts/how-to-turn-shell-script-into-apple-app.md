@@ -1,7 +1,7 @@
 ---
 title: "How to Turn a Shell Script into an Apple App"
 tags: ["shell-script", "macos", "app-development"]
-date: 2025-08-12T16:30:00-05:00
+# date: 2025-08-12T16:30:00-05:00
 description: "Tutorial on how to convert a shell script into a macOS application."
 draft: false
 ---
