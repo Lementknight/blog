@@ -6,12 +6,37 @@ on:
   pull_request:
     branches: 
       - main
+    paths:
+      - 'content/**'
+      - 'layouts/**'
+      - 'themes/**'
+      - 'static/**'
+      - 'assets/**'
+      - 'data/**'
+      - 'i18n/**'
+      - 'archetypes/**'
+      - 'resources/**'
+      - 'hugo.yml'
+      - 'hugo.yaml'
+      - 'hugo.toml'
+      - 'config.yml'
+      - 'config.yaml'
+      - 'config.toml'
+      - 'go.mod'
+      - 'go.sum'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/test-hugo-build.yml'
+      - '.github/workflows/firebase-hosting-pull-request.yml'
+
 permissions:
   checks: write
   contents: read
   pull-requests: write
+
 jobs:
   build_and_preview:
+    # Only run if this is from the same repository and build test passes
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     env:
@@ -24,6 +49,45 @@ jobs:
         with:
           submodules: recursive  # Fetch Hugo themes
           fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+      
+      - name: Wait for Hugo build test to pass
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const maxWaitTime = 300000; // 5 minutes
+            const checkInterval = 10000; // 10 seconds
+            let elapsedTime = 0;
+            
+            console.log('Waiting for Hugo build test to complete...');
+            
+            while (elapsedTime < maxWaitTime) {
+              const { data: checkRuns } = await github.rest.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: context.payload.pull_request.head.sha
+              });
+              
+              const buildTest = checkRuns.check_runs.find(run => 
+                run.name === 'test-build' && run.status === 'completed'
+              );
+              
+              if (buildTest) {
+                console.log(`Build test completed with status: ${buildTest.conclusion}`);
+                if (buildTest.conclusion === 'success') {
+                  console.log('✅ Hugo build test passed! Proceeding with deployment.');
+                  return;
+                } else {
+                  core.setFailed(`❌ Hugo build test failed with status: ${buildTest.conclusion}`);
+                  return;
+                }
+              }
+              
+              console.log(`Build test still running... waiting ${checkInterval/1000}s`);
+              await new Promise(resolve => setTimeout(resolve, checkInterval));
+              elapsedTime += checkInterval;
+            }
+            
+            core.setFailed('❌ Timeout waiting for Hugo build test to complete');
       
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -62,37 +126,34 @@ jobs:
         run: |
           git config core.quotepath false
       
-      - name: Cache restore
-        id: cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: hugo-pr-${{ github.run_id }}-${{ github.event.pull_request.head.sha }}
-          restore-keys: |
-            hugo-pr-${{ github.run_id }}-
-            hugo-pr-
-            hugo-
-      
-      - name: Build Hugo site for preview
+      - name: Build Hugo site
         run: |
+          # Build Hugo site with relative URLs for Firebase preview
           hugo \
             --gc \
             --minify \
             --environment production \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "https://myblog-4e0da--pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}.web.app/"
-      
-      - name: Cache save
-        id: cache-save
-        uses: actions/cache/save@v4
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+            --baseURL "/"
       
       - name: Deploy to Firebase Hosting Preview Channel
+        id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYBLOG_4E0DA }}
           projectId: myblog-4e0da
           channelId: pr-${{ github.event.pull_request.number }}
+
+      - name: Comment with preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const previewUrl = '${{ steps.firebase_deploy.outputs.details_url }}';
+            const comment = `🚀 @lementknight Test build is live at: ${previewUrl}`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

@@ -1,0 +1,108 @@
+{{- if and (.IsPage) (not .Params.disable_jsonld) -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "articleSection": {{ .Section | jsonify }},
+  "name": {{ .Title | jsonify }},
+  "headline": {{ .Title | jsonify }},
+  "alternativeHeadline": {{ (.Params.subtitle | default .Summary) | jsonify }},
+  "description": {{ (.Description | default .Summary) | jsonify }},
+  "inLanguage": {{ .Site.Language.Lang | default .Site.Language.LanguageCode | default "en-us" | jsonify }},
+  "isFamilyFriendly": "true",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  },
+  {{- with .PublishDate }}
+  "dateCreated": {{ .Format "2006-01-02T15:04:05.00Z" | jsonify }},
+  "datePublished": {{ .Format "2006-01-02T15:04:05.00Z" | jsonify }},
+  {{- end }}
+  {{- with .Lastmod }}
+  "dateModified": {{ .Format "2006-01-02T15:04:05.00Z" | jsonify }},
+  {{- end }}
+  "wordCount": {{ .WordCount }},
+  "url": {{ .Permalink | jsonify }},
+  {{- $images := partial "templates/_funcs/get-page-images" . -}}
+  {{- with index $images 0 }}
+  "image": {{ .Permalink | jsonify }},
+  {{- end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ (.Site.Params.assets.favicon | default "favicon.ico") | absURL | jsonify }}
+    }
+  },
+  {{- with (.Params.author | default .Site.Params.author) }}
+  "author": 
+    {{- if (or (eq (printf "%T" .) "[]string") (eq (printf "%T" .) "[]interface {}")) -}}
+    [
+      {{- range $i, $v := . -}}
+      {{- if $i }}, {{ end -}}
+      {
+        "@type": "Person",
+        "name": {{ $v | jsonify }}
+      }
+      {{- end }}
+    ]
+    {{- else -}}
+    {
+      "@type": "Person",
+      "name": {{ . | jsonify }}
+    }
+    {{- end -}}
+  {{- end }}
+}
+</script>
+{{- end }}
+
+{{- if and (.IsHome) (not .Params.disable_jsonld) -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": {{ .Permalink | jsonify }},
+  "name": {{ .Site.Title | jsonify }},
+  "description": {{ .Site.Params.description | jsonify }},
+  "thumbnailUrl": {{ (.Site.Params.assets.favicon | default "favicon.ico") | absURL | jsonify }},
+  "sameAs": [
+    {{- range $i, $v := .Site.Params.socialIcons }}
+    {{- if $i }}, {{ end -}}
+    {{ .url | jsonify }}
+    {{- end }}
+  ]
+}
+</script>
+{{- end }}
+
+{{- /* https://schema.org/BreadcrumbList */ -}}
+{{- if and (.IsPage) (not .Params.disable_jsonld) -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": {{ .Site.Title | jsonify }},
+      "item": {{ .Site.BaseURL | jsonify }}
+    }
+    {{- $sections := split .RelPermalink "/" -}}
+    {{- $sectionCount := len $sections -}}
+    {{- if gt $sectionCount 2 -}}
+    {{- range $i, $section := first (sub $sectionCount 1) (after 1 $sections) -}}
+    ,{
+      "@type": "ListItem",
+      "position": {{ add $i 2 }},
+      "name": {{ $section | title | jsonify }},
+      "item": {{ printf "%s/%s/" $.Site.BaseURL $section | jsonify }}
+    }
+    {{- end -}}
+    {{- end }}
+  ]
+}
+</script>
+{{- end }}
