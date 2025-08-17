@@ -99,16 +99,27 @@ jobs:
           projectId: myblog-4e0da
           channelId: pr-${{ github.event.pull_request.number }}
       
-      - name: Extract preview URL and rebuild Hugo
+      - name: Rebuild Hugo with Firebase preview URL
         run: |
-          # Get the preview URL from the Firebase deploy step output
-          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
-          echo "Preview URL: $PREVIEW_URL"
+          # Wait a moment for Firebase to be ready
+          sleep 5
           
-          # Clean the public directory
+          # Try to get the actual preview URL from Firebase action output
+          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
+          
+          # If empty, construct the URL (Firebase format)
+          if [ -z "$PREVIEW_URL" ] || [ "$PREVIEW_URL" == "" ]; then
+            # Firebase preview URLs follow this pattern for channels
+            PREVIEW_URL="https://myblog-4e0da--pr-${{ github.event.pull_request.number }}.web.app"
+            echo "Constructed preview URL: $PREVIEW_URL"
+          else
+            echo "Got preview URL from Firebase action: $PREVIEW_URL"
+          fi
+          
+          # Clean the public directory and rebuild
           rm -rf public/*
           
-          # Rebuild Hugo with the correct baseURL
+          echo "Building Hugo with baseURL: $PREVIEW_URL"
           hugo \
             --gc \
             --minify \
@@ -116,7 +127,7 @@ jobs:
             --cacheDir "${{ runner.temp }}/hugo_cache" \
             --baseURL "$PREVIEW_URL"
           
-          echo "Hugo rebuilt with baseURL: $PREVIEW_URL"
+          echo "✅ Hugo rebuild completed"
       
       - name: Redeploy with correct URLs
         uses: FirebaseExtended/action-hosting-deploy@v0
