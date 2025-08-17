@@ -24,10 +24,14 @@ imaging:
 params:
   # Uncomment to completely disable image processing
   bypassImageProcessing: true
-  
+  assets:
+    favicon: "favicon.ico"
+    favicon16x16: "favicon16x16.png"
+    favicon32x32: "favicon32x32.png"
+    apple_touch_icon: "apple-touch-icon.png"
   profileMode:
     enabled: true
-    title: "<Title>" # optional default will be site title
+    title: "Caleb Aguirre-Leon's Website" # optional default will be site title
     subtitle: "Welcome to my website 👋  \n Below you can find links to my GitHub Page, my personal music, and my email"
     imageUrl: "/images/profile.jpeg" # Static image - no compression
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
