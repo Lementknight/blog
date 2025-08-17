@@ -6,12 +6,15 @@ on:
   pull_request:
     branches: 
       - main
+
 permissions:
   checks: write
   contents: read
   pull-requests: write
+
 jobs:
   build_and_preview:
+    # Only run if this is from the same repository and build test passes
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     env:
@@ -24,6 +27,45 @@ jobs:
         with:
           submodules: recursive  # Fetch Hugo themes
           fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+      
+      - name: Wait for Hugo build test to pass
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const maxWaitTime = 300000; // 5 minutes
+            const checkInterval = 10000; // 10 seconds
+            let elapsedTime = 0;
+            
+            console.log('Waiting for Hugo build test to complete...');
+            
+            while (elapsedTime < maxWaitTime) {
+              const { data: checkRuns } = await github.rest.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: context.payload.pull_request.head.sha
+              });
+              
+              const buildTest = checkRuns.check_runs.find(run => 
+                run.name === 'test-build' && run.status === 'completed'
+              );
+              
+              if (buildTest) {
+                console.log(`Build test completed with status: ${buildTest.conclusion}`);
+                if (buildTest.conclusion === 'success') {
+                  console.log('✅ Hugo build test passed! Proceeding with deployment.');
+                  return;
+                } else {
+                  core.setFailed(`❌ Hugo build test failed with status: ${buildTest.conclusion}`);
+                  return;
+                }
+              }
+              
+              console.log(`Build test still running... waiting ${checkInterval/1000}s`);
+              await new Promise(resolve => setTimeout(resolve, checkInterval));
+              elapsedTime += checkInterval;
+            }
+            
+            core.setFailed('❌ Timeout waiting for Hugo build test to complete');
       
       - name: Setup Go
         uses: actions/setup-go@v5
