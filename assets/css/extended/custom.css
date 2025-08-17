@@ -1,0 +1,177 @@
+/* ADA/Section 508 Compliant Typography */
+
+/* Import accessible sans-serif fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Section 508 Compliant Font Stack - Sans-serif required */
+:root {
+    --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+    --font-size-base: 16px; /* Minimum readable size for accessibility */
+    --line-height-body: 1.7; /* Enhanced readability */
+}
+
+/* ======================
+   ADA COMPLIANT THEME TOGGLE 
+   ====================== */
+
+/* Fix theme toggle accessibility issues */
+button#theme-toggle {
+    /* ADA Requirement: Minimum 44x44px touch target */
+    min-width: 44px !important;
+    min-height: 44px !important;
+    
+    /* Ensure proper padding for touch targets */
+    padding: 10px !important;
+    
+    /* Better visual feedback */
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* CRITICAL: Restore focus indicators for keyboard navigation */
+button#theme-toggle:focus {
+    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
+    outline-offset: 2px !important;
+    background-color: rgba(0, 102, 204, 0.1) !important;
+}
+
+/* Enhanced hover states for better usability */
+button#theme-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    transform: scale(1.05);
+}
+
+/* Active state feedback */
+button#theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Ensure icons are properly sized within the accessible button */
+button#theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: auto;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    button#theme-toggle:focus {
+        outline: 3px solid currentColor !important;
+        outline-offset: 2px !important;
+    }
+}
+
+/* Body text - Sans-serif as required by Section 508 */
+body, .main {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+}
+
+/* Headers - Sans-serif with good contrast hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-body);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.5em;
+}
+
+/* Specific header sizes for accessibility */
+h1 { font-size: 2.25rem; } /* 36px */
+h2 { font-size: 1.875rem; } /* 30px */
+h3 { font-size: 1.5rem; } /* 24px */
+h4 { font-size: 1.25rem; } /* 20px */
+h5 { font-size: 1.125rem; } /* 18px */
+h6 { font-size: 1rem; } /* 16px */
+
+/* Code blocks - Keep monospace for technical content */
+code, pre, .highlight, kbd, samp {
+    font-family: var(--font-family-mono);
+    font-size: 0.875rem; /* 14px - not too small */
+    font-weight: 400;
+}
+
+/* Navigation and UI - Sans-serif */
+.nav, .menu, .breadcrumbs {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+}
+
+/* Blog post content - Optimized for reading */
+.post-content, .page-content, .post-single .post-content {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+}
+
+/* Paragraphs - Enhanced spacing for readability */
+p {
+    margin-bottom: 1.5rem;
+    line-height: var(--line-height-body);
+}
+
+/* Lists - Accessible formatting */
+ul, ol {
+    line-height: var(--line-height-body);
+    margin-bottom: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Links - Ensure they're distinguishable */
+a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* Focus indicators for keyboard navigation */
+a:focus, button:focus, input:focus, textarea:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+/* Ensure text can be resized to 200% without loss of functionality */
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 18px; /* Slightly larger on mobile */
+    }
+}
+
+/* Override any theme-specific font families for compliance */
+*, *::before, *::after {
+    font-family: inherit;
+}
+
+/* Specific overrides for PaperMod theme elements */
+.post-title, .page-title {
+    font-family: var(--font-family-body) !important;
+}
+
+.post-meta, .post-description {
+    font-family: var(--font-family-body) !important;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Accessibility: Ensure minimum touch target size */
+button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Print styles - Maintain accessibility in print */
+@media print {
+    body {
+        font-family: var(--font-family-body);
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+}
