@@ -4,6 +4,10 @@ title: Caleb Aguirre-Leon
 theme: PaperMod
 description: "Caleb Aguirre-Leon's website"
 
+# Use relative URLs for better compatibility with preview deployments
+relativeURLs: true
+canonifyURLs: false
+
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 

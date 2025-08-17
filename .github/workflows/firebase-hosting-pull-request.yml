@@ -62,46 +62,16 @@ jobs:
         run: |
           git config core.quotepath false
       
-      - name: Deploy to Firebase Hosting Preview Channel
-        id: firebase-deploy
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYBLOG_4E0DA }}
-          projectId: myblog-4e0da
-          channelId: pr-${{ github.event.pull_request.number }}
-      
-      - name: Rebuild Hugo with Firebase preview URL
+      - name: Build Hugo site
         run: |
-          # Wait a moment for Firebase to be ready
-          sleep 5
-          
-          # Try to get the actual preview URL from Firebase action output
-          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
-          
-          # If empty, construct the URL (Firebase format)
-          if [ -z "$PREVIEW_URL" ] || [ "$PREVIEW_URL" == "" ]; then
-            # Firebase preview URLs follow this pattern for channels
-            PREVIEW_URL="https://myblog-4e0da--pr-${{ github.event.pull_request.number }}.web.app"
-            echo "Constructed preview URL: $PREVIEW_URL"
-          else
-            echo "Got preview URL from Firebase action: $PREVIEW_URL"
-          fi
-          
-          # Clean the public directory and rebuild
-          rm -rf public/*
-          
-          echo "Building Hugo with baseURL: $PREVIEW_URL"
+          # Build Hugo site with relative URLs for Firebase preview
           hugo \
             --gc \
             --minify \
             --environment production \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "$PREVIEW_URL"
-          
-          echo "✅ Hugo rebuild completed"
+            --baseURL "/"
       
-      - name: Redeploy with correct URLs
+      - name: Deploy to Firebase Hosting Preview Channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
