@@ -62,34 +62,6 @@ jobs:
         run: |
           git config core.quotepath false
       
-      - name: Cache restore
-        id: cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: hugo-pr-${{ github.run_id }}-${{ github.event.pull_request.head.sha }}
-          restore-keys: |
-            hugo-pr-${{ github.run_id }}-
-            hugo-pr-
-            hugo-
-      
-      - name: Build Hugo site for preview (initial build)
-        run: |
-          # Initial build with relative URLs
-          hugo \
-            --gc \
-            --minify \
-            --environment production \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "/"
-      
-      - name: Cache save
-        id: cache-save
-        uses: actions/cache/save@v4
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
-      
       - name: Deploy to Firebase Hosting Preview Channel
         id: firebase-deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
