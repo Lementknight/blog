@@ -71,3 +71,100 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {{- end }}
+
+{{- /* ADA Compliant Back-to-Top Button Enhancement */ -}}
+<script>
+/* ADA Compliant Back-to-Top Button Enhancement */
+document.addEventListener('DOMContentLoaded', function() {
+    const topLink = document.getElementById('top-link');
+    if (!topLink) return;
+
+    // Function to manage tabindex based on visibility
+    function updateTopLinkAccessibility() {
+        const isVisible = topLink.style.visibility === 'visible' || 
+                         topLink.classList.contains('show') ||
+                         getComputedStyle(topLink).visibility === 'visible';
+        
+        if (isVisible) {
+            // Make focusable when visible
+            topLink.setAttribute('tabindex', '0');
+            topLink.setAttribute('aria-hidden', 'false');
+        } else {
+            // Remove from tab order when hidden
+            topLink.setAttribute('tabindex', '-1');
+            topLink.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    // Enhanced ARIA attributes
+    topLink.setAttribute('role', 'button');
+    topLink.setAttribute('aria-label', 'Go back to top of page');
+    
+    // Initialize accessibility state
+    updateTopLinkAccessibility();
+
+    // Monitor visibility changes using MutationObserver
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && 
+                (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+                updateTopLinkAccessibility();
+            }
+        });
+    });
+
+    // Start observing
+    observer.observe(topLink, {
+        attributes: true,
+        attributeFilter: ['style', 'class']
+    });
+
+    // Also monitor style changes that might not trigger mutations
+    const checkVisibility = setInterval(function() {
+        updateTopLinkAccessibility();
+    }, 1000);
+
+    // Enhanced keyboard support
+    topLink.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            
+            // Smooth scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Focus the top of the page for screen readers
+            const topElement = document.getElementById('top') || document.body;
+            if (topElement) {
+                topElement.focus();
+            }
+        }
+    });
+
+    // Enhanced click handler
+    topLink.addEventListener('click', function(e) {
+        // Let the original handler work, but add smooth scrolling
+        e.preventDefault();
+        
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Focus management for accessibility
+        const topElement = document.getElementById('top') || document.body;
+        if (topElement) {
+            topElement.setAttribute('tabindex', '-1');
+            topElement.focus();
+        }
+    });
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', function() {
+        observer.disconnect();
+        clearInterval(checkVisibility);
+    });
+});
+</script>

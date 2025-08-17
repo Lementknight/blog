@@ -63,6 +63,235 @@ button#theme-toggle svg {
     }
 }
 
+/* ======================
+   ADA COMPLIANT NAVBAR STYLING 
+   ====================== */
+
+/* Logo/Brand link styling - consistent with theme */
+.logo a {
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+}
+
+.logo a:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+.logo a:focus {
+    outline: 2px solid #0066cc !important;
+    outline-offset: 3px !important;
+    border-radius: 4px;
+}
+
+.logo a:active {
+    transform: translateY(0px);
+}
+
+/* Menu navigation links - matching logo styling */
+#menu a {
+    transition: all 0.2s ease;
+    text-decoration: none;
+    padding: 10px 12px; /* Increased padding for complete outline coverage */
+    border-radius: 6px; /* Slightly larger border radius */
+    display: inline-block;
+    position: relative;
+    /* Ensure the element has enough space for the outline */
+    margin: 2px; /* Small margin to prevent outline clipping */
+    line-height: 1.4; /* Better line height for consistent button size */
+}
+
+/* Menu link hover states - same as logo */
+#menu a:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* Menu link focus states - ADA compliant with complete outline */
+#menu a:focus {
+    outline: 2px solid #0066cc !important;
+    outline-offset: 1px !important; /* Reduced offset for better containment */
+    background-color: rgba(0, 102, 204, 0.1);
+    /* Ensure outline doesn't get clipped */
+    box-shadow: 0 0 0 1px rgba(0, 102, 204, 0.2); /* Additional visual indicator */
+}
+
+/* Menu link active states */
+#menu a:active {
+    transform: translateY(0px);
+}
+
+/* Enhanced active state for current page */
+#menu .active {
+    font-weight: 500;
+    border-bottom: 2px solid currentColor;
+    background-color: rgba(0, 102, 204, 0.05);
+    /* Ensure active state works with the new padding */
+    padding-bottom: 8px; /* Adjust for border-bottom */
+}
+
+/* Ensure minimum touch target size for mobile */
+@media (max-width: 768px) {
+    #menu a {
+        padding: 12px 16px; /* Increased horizontal padding on mobile */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        margin: 3px; /* Slightly more margin on mobile */
+    }
+}
+
+/* Menu container adjustments to prevent outline clipping */
+#menu {
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+    /* Add padding to container to prevent focus outline clipping */
+    padding: 4px 0 !important;
+    /* Ensure scrolling doesn't cut off focus indicators */
+    scroll-padding: 4px;
+}
+
+/* Menu list items - ensure proper spacing */
+#menu li {
+    display: inline-block;
+    /* Add small margin to prevent outline overlap */
+    margin: 0 2px;
+}
+
+/* Override theme's margin between menu items */
+#menu li + li {
+    margin-inline-start: calc(var(--gap) - 4px); /* Adjust for our new margins */
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+    .logo a:focus,
+    #menu a:focus {
+        outline: 3px solid currentColor !important;
+        outline-offset: 2px !important;
+    }
+    
+    #menu a:hover {
+        background-color: currentColor;
+        color: var(--theme);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .logo a,
+    #menu a {
+        transition: none;
+    }
+    
+    .logo a:hover,
+    #menu a:hover {
+        transform: none;
+    }
+}
+
+/* ======================
+   ADA COMPLIANT "BACK TO TOP" BUTTON 
+   ====================== */
+
+/* Fix the top-link accessibility issues */
+.top-link {
+    /* Ensure it's always focusable when visible */
+    visibility: hidden;
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+    z-index: 99;
+    background: var(--tertiary);
+    width: 48px !important; /* Increase to meet 44px minimum */
+    height: 48px !important; /* Increase to meet 44px minimum */
+    padding: 12px;
+    border-radius: 50%;
+    transition: visibility 0.5s, opacity 0.8s linear, transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* Ensure it can receive focus */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    
+    /* Add subtle shadow for better visibility */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* When visible, ensure it's focusable and in tab order */
+.top-link[style*="visibility: visible"],
+.top-link.show {
+    visibility: visible !important;
+    /* JavaScript will handle tabindex management */
+}
+
+/* CRITICAL: Restore focus indicators */
+.top-link:focus {
+    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
+    outline-offset: 3px !important;
+    background-color: var(--primary) !important;
+    color: var(--theme) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+/* Enhanced hover state */
+.top-link:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Active state */
+.top-link:active {
+    transform: scale(0.95);
+}
+
+/* Ensure the SVG icon is properly sized and accessible */
+.top-link svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    filter: drop-shadow(0px 0px 0px var(--theme));
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .top-link:focus {
+        outline: 3px solid currentColor !important;
+        outline-offset: 2px !important;
+    }
+    
+    .top-link {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support for top-link */
+@media (prefers-reduced-motion: reduce) {
+    .top-link {
+        transition: visibility 0.5s, opacity 0.8s linear; /* Keep only essential transitions */
+    }
+    
+    .top-link:hover,
+    .top-link:focus {
+        transform: none;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .top-link {
+        bottom: 80px;
+        right: 20px;
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
 /* Body text - Sans-serif as required by Section 508 */
 body, .main {
     font-family: var(--font-family-body);
