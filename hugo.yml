@@ -7,6 +7,19 @@ description: "Caleb Aguirre-Leon's website"
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
+# Configure file caches for GitHub Actions
+caches:
+  images:
+    dir: ':cacheDir/images'
+  assets:
+    dir: ':cacheDir/assets'
+  getjson:
+    dir: ':cacheDir/getjson'
+  getcsv:
+    dir: ':cacheDir/getcsv'
+  getresource:
+    dir: ':cacheDir/getresource'
+
 params:
   # Enable ADA compliant theme toggle
   disableThemeToggle: false

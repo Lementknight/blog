@@ -2,7 +2,10 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-on: pull_request
+on: 
+  pull_request:
+    branches: 
+      - main
 permissions:
   checks: write
   contents: read
@@ -11,23 +14,85 @@ jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.148.2
+      GO_VERSION: 1.24.5
+      NODE_VERSION: 22.18.0
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo themes
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: recursive  # Fetch Hugo themes
+          fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
       
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: Setup Go
+        uses: actions/setup-go@v5
         with:
-          hugo-version: 'latest'
-          extended: true
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
       
-      - name: Build Hugo site
-        run: hugo --minify
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
       
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Create directory for user-specific executable files
+        run: |
+          mkdir -p "${HOME}/.local"
+      
+      - name: Install Hugo
+        run: |
+          curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          mkdir "${HOME}/.local/hugo"
+          tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
+      
+      - name: Verify Hugo installation
+        run: |
+          echo "Hugo: $(hugo version)"
+          echo "Go: $(go version)"
+          echo "Node.js: $(node --version)"
+      
+      - name: Install Node.js dependencies
+        run: |
+          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+      
+      - name: Configure Git
+        run: |
+          git config core.quotepath false
+      
+      - name: Cache restore
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: hugo-pr-${{ github.run_id }}-${{ github.event.pull_request.head.sha }}
+          restore-keys: |
+            hugo-pr-${{ github.run_id }}-
+            hugo-pr-
+            hugo-
+      
+      - name: Build Hugo site for preview
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --environment production \
+            --cacheDir "${{ runner.temp }}/hugo_cache" \
+            --baseURL "https://myblog-4e0da--pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}.web.app/"
+      
+      - name: Cache save
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+      
+      - name: Deploy to Firebase Hosting Preview Channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYBLOG_4E0DA }}
           projectId: myblog-4e0da
+          channelId: pr-${{ github.event.pull_request.number }}
