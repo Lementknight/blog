@@ -75,12 +75,13 @@ jobs:
       
       - name: Build Hugo site for preview
         run: |
+          # Use relative URLs for preview deployments to avoid baseURL issues
           hugo \
             --gc \
             --minify \
             --environment production \
             --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "https://myblog-4e0da--pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}.web.app/"
+            --baseURL "/"
       
       - name: Cache save
         id: cache-save
