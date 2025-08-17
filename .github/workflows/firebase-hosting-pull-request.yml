@@ -6,6 +6,28 @@ on:
   pull_request:
     branches: 
       - main
+    paths:
+      - 'content/**'
+      - 'layouts/**'
+      - 'themes/**'
+      - 'static/**'
+      - 'assets/**'
+      - 'data/**'
+      - 'i18n/**'
+      - 'archetypes/**'
+      - 'resources/**'
+      - 'hugo.yml'
+      - 'hugo.yaml'
+      - 'hugo.toml'
+      - 'config.yml'
+      - 'config.yaml'
+      - 'config.toml'
+      - 'go.mod'
+      - 'go.sum'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/test-hugo-build.yml'
+      - '.github/workflows/firebase-hosting-pull-request.yml'
 
 permissions:
   checks: write
