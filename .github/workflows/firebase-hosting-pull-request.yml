@@ -73,9 +73,9 @@ jobs:
             hugo-pr-
             hugo-
       
-      - name: Build Hugo site for preview
+      - name: Build Hugo site for preview (initial build)
         run: |
-          # Use relative URLs for preview deployments to avoid baseURL issues
+          # Initial build with relative URLs
           hugo \
             --gc \
             --minify \
@@ -91,6 +91,34 @@ jobs:
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
       
       - name: Deploy to Firebase Hosting Preview Channel
+        id: firebase-deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYBLOG_4E0DA }}
+          projectId: myblog-4e0da
+          channelId: pr-${{ github.event.pull_request.number }}
+      
+      - name: Extract preview URL and rebuild Hugo
+        run: |
+          # Get the preview URL from the Firebase deploy step output
+          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
+          echo "Preview URL: $PREVIEW_URL"
+          
+          # Clean the public directory
+          rm -rf public/*
+          
+          # Rebuild Hugo with the correct baseURL
+          hugo \
+            --gc \
+            --minify \
+            --environment production \
+            --cacheDir "${{ runner.temp }}/hugo_cache" \
+            --baseURL "$PREVIEW_URL"
+          
+          echo "Hugo rebuilt with baseURL: $PREVIEW_URL"
+      
+      - name: Redeploy with correct URLs
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
