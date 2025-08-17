@@ -3,7 +3,7 @@ title: "Hosting a Hugo blog on GitHub Pages with GitHub Actions"
 tags: ["hugo", "github-pages", "github-actions"]
 date: 2025-03-17T10:48:29+02:00
 description: "Tutorial on how to publish a Hugo blog using GitHub Actions"
-draft: true
+draft: false
 ---
 This post describes how to set up a blog using [Hugo](https://gohugo.io/), an
 open-source static site generator. The blog is hosted on [GitHub
