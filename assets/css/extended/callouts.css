@@ -1,0 +1,104 @@
+/* Callout Shortcode Styles - Isolated and Self-Contained */
+.callout {
+  margin: 1.5em 0;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid;
+  /* Use explicit colors instead of CSS variables to avoid conflicts */
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.callout-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* Use explicit color instead of CSS variables */
+  color: #2c3e50;
+}
+
+.callout-icon {
+  font-size: 1.1em;
+}
+
+.callout-content {
+  margin: 0;
+  /* Use explicit color instead of CSS variables */
+  color: #34495e;
+}
+
+.callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Callout Types */
+.callout-info {
+  border-left-color: #3498db;
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.callout-warning {
+  border-left-color: #f39c12;
+  background-color: rgba(243, 156, 18, 0.1);
+}
+
+.callout-danger {
+  border-left-color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.callout-success {
+  border-left-color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.1);
+}
+
+.callout-tip {
+  border-left-color: #9b59b6;
+  background-color: rgba(155, 89, 182, 0.1);
+}
+
+.callout-note {
+  border-left-color: #34495e;
+  background-color: rgba(52, 73, 94, 0.1);
+}
+
+/* Dark mode adjustments - Explicit colors to avoid theme conflicts */
+.dark .callout {
+  background-color: #2c3e50;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.dark .callout-title {
+  color: #ecf0f1;
+}
+
+.dark .callout-content {
+  color: #bdc3c7;
+}
+
+.dark .callout-info {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.dark .callout-warning {
+  background-color: rgba(243, 156, 18, 0.2);
+}
+
+.dark .callout-danger {
+  background-color: rgba(231, 76, 60, 0.2);
+}
+
+.dark .callout-success {
+  background-color: rgba(39, 174, 96, 0.2);
+}
+
+.dark .callout-tip {
+  background-color: rgba(155, 89, 182, 0.2);
+}
+
+.dark .callout-note {
+  background-color: rgba(52, 73, 94, 0.2);
+}
