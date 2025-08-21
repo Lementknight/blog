@@ -1,7 +1,7 @@
 test_build:
 	rm -rf public/
 	hugo --environment production --minify --gc
-	hugo server --disableFastRender --environment production --buildFuture 
+	hugo server --disableFastRender --buildDrafts --buildFuture --environment production
 
 live_build:
 	rm -rf public/
