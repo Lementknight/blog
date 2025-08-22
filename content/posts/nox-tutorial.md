@@ -1,7 +1,7 @@
 ---
 title: "Nox Tutorial"
 tags: ["python", "nox", "testing", "automation", "development-tools", "tutorial", "workflow-automation"]
-date: "2025-08-22T21:45:00-05:00"
+date: 2025-08-22T01:00:00-05:00
 description: "Learn how to automate your Python development workflow with Nox. Stop typing complex testing commands and create reproducible environments for formatting, linting, and testing with simple noxfile.py configurations."
 draft: false
 ---
