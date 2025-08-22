@@ -1,27 +1,27 @@
-+++
-title = 'Nox Tutorial'
-tags = []
-date = '2025-08-20T01:26:40-04:00'
-description = ''
-draft = false
-+++
+---
+title: "Nox Tutorial"
+tags: ["python", "nox", "testing", "automation", "development-tools", "tutorial", "workflow-automation"]
+date: "2025-08-22T21:45:00-05:00"
+description: "Learn how to automate your Python development workflow with Nox. Stop typing complex testing commands and create reproducible environments for formatting, linting, and testing with simple noxfile.py configurations."
+draft: false
+---
 
-In my pursuit to improve as a software engineer I happened upon tools like [Black](https://black.readthedocs.io/en/stable/) and [Ruff](https://docs.astral.sh/ruff/) that helped me learn a lot about how to write pythonic code that adheres to Python coding best practices outlined in [PEP 8](https://peps.python.org/pep-0008/). For a linter and formatter it is pretty easy to remember the commands the arguments you need to run the command, but when you start testing your code the command can become quite cumbersome.
+In my pursuit to improve as a software engineer, I discovered tools like [Black](https://black.readthedocs.io/en/stable/) and [Ruff](https://docs.astral.sh/ruff/) that helped me write pythonic code following [PEP 8](https://peps.python.org/pep-0008/) best practices. While linter and formatter commands are easy to remember, testing commands can become painfully cumbersome.
 
-For example, for one of the projects that I am working on testing is an important part of our development workflow and the command that I would have to run is:
+For example, in one of my current projects, testing requires this command:
 ```bash
 coverage run -m unittest discover -s "tests" -p "*_test.py"
 ```
-And then this command to run
+Followed by:
 ```bash
 coverage report --fail-under=100 #generates coverage report
 coverage html #creates HTML for coverage report
 ```
-Just typing out those commands made my fingers hurt. And this isn't even going into ensuring that your local virtual environment is set up correctly with all the dependencies installed. This is where Nox comes in.
+Just typing those commands makes my fingers hurt! And that's before dealing with virtual environment setup and dependencies. This is where Nox comes in.
 
-Let's say you want to take the formatting, linting, and testing command you have and you want to simplify how you call them. Nox gives you the ability to automate your testing and development workflows by defining them in a `noxfile.py`. This file allows you to specify the different sessions you want to run, along with their dependencies and commands. With Nox, you can easily create a consistent and reproducible environment for your tests, making it easier to manage dependencies and run your test suite.
+Nox lets you automate your formatting, linting, and testing workflows by defining them in a `noxfile.py`. This file specifies different sessions to run, along with their dependencies and commands. With Nox, you get a consistent and reproducible environment that makes dependency management and test execution simpler.
 
-Here is what a `noxfile.py` file would look like if you wanted to automate your formatting:
+Here's what a `noxfile.py` looks like for automating formatting:
 
 ```python
 import nox
@@ -34,18 +34,44 @@ def format(session: nox.Session) -> None:
 ...
 ```
 
-Here you can see that you need to import the nox module and use a decorator to define a function. Notice how you need to install the black package within the session. This is because each session of nox is a an isolated environment, meaning that any packages you install or commands you run are contained within that session.
+You import the `nox` module and use the `@nox.session` decorator to define a function. Notice that you install the black package within the session. This is because each Nox session runs in an isolated environment where packages and commands are contained within that session.
 
 
-Here is how you would use the command in the terminal:
+Run it in the terminal like this:
 
 ```bash
 nox -s format
 ```
 
-Simple right? Exactly! You can now run your formatting command without having to remember the exact command or the arguments you need to pass.
+Simple, right? Now you can run your formatting without remembering complex commands or arguments.
 
-Assuming that you are using a requirements.txt file for your Python's projects dependencies, you can create a `noxfile.py` like this:
+## Common Nox Commands
+
+Here are some essential commands you'll use frequently with Nox:
+
+```bash
+nox --list          # List all available sessions
+nox                 # Run all sessions
+nox -s format       # Run a specific session
+nox -s format lint  # Run multiple sessions
+nox -s tests --     # Pass arguments to the session (after --)
+```
+
+{{< callouts "tip" "Project Structure" >}}
+Place your `noxfile.py` in the root directory of your project, alongside your `requirements.txt` or `pyproject.toml` file. This ensures Nox can easily find your project files and dependencies.
+{{< /callouts >}}
+
+Before creating your `noxfile.py`, install Nox in your development environment:
+
+```bash
+pip install nox black ruff
+```
+
+{{< callouts "note" "Virtual Environment Recommendation" >}}
+I prefer to put all of my dependencies in a `requirements.txt` file and install them in a virtual environment. This keeps my global Python environment clean and avoids version conflicts between projects.
+{{< /callouts >}}
+
+If you're using a requirements.txt file for your project dependencies, here's a complete `noxfile.py` example:
 
 ```python
 import nox
@@ -89,3 +115,13 @@ def tests(session: nox.Session) -> None:
     # Generate HTML report for local viewing
     session.run("coverage", "html")
 ```
+
+> If you want to read more about nox, check out the [official documentation](https://nox.thea.codes/en/stable/).
+
+And that's it! You now have a fully automated testing and development workflow using Nox. You can easily run your formatting, linting, and testing commands with simple terminal commands. This saves time and ensures your development environment stays consistent and reproducible across different machines.
+
+Next week I plan on explaining how you can use nox in your ci/cd pipeline to automate your testing and deployment processes. Stay tuned!
+
+If you have any questions or topics you'd like me to cover, feel free to reach out!
+
+Contact me at [calebaguirreleon@gmail.com](mailto:calebaguirreleon+blog.questions@gmail.com?subject=Question%20about%20Concept&body=Hi%20Caleb%2C%0A%0AI%20read%20your%20Nox%20tutorial%20and%20had%20a%20question%3A%0A%0A%5BYour%20question%20here%5D%0A%0AThanks%21)
