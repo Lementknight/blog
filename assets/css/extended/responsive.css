@@ -1,0 +1,244 @@
+/* ======================
+   RESPONSIVE DESIGN SYSTEM
+   Following MDN Best Practices
+   ====================== */
+
+/* Mobile-first responsive breakpoints using relative units */
+:root {
+    /* Responsive breakpoints in rem (16px base) */
+    --breakpoint-sm: 30rem;    /* 480px - Large phones */
+    --breakpoint-md: 48rem;    /* 768px - Tablets */
+    --breakpoint-lg: 64rem;    /* 1024px - Desktop */
+    --breakpoint-xl: 80rem;    /* 1280px - Large desktop */
+    
+    /* Flexible spacing system */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* Responsive typography scale */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    
+    /* Base font size - mobile first */
+    font-size: var(--font-size-base);
+}
+
+/* ======================
+   MOBILE-FIRST RESPONSIVE IMAGES & MEDIA
+   ====================== */
+
+/* Make all media responsive by default */
+img,
+picture,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Prevent images from growing larger than container */
+img {
+    object-fit: cover;
+}
+
+/* ======================
+   FLEXIBLE TYPOGRAPHY
+   ====================== */
+
+/* Responsive typography using clamp() for fluid scaling */
+h1 {
+    font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-3xl));
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-2xl));
+    line-height: 1.4;
+}
+
+/* Body text scales appropriately */
+body {
+    font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
+    line-height: 1.6;
+}
+
+/* ======================
+   RESPONSIVE CONTAINERS
+   ====================== */
+
+/* Container with flexible max-width */
+.container {
+    width: 100%;
+    max-width: 75rem; /* 1200px */
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ======================
+   MOBILE-FIRST MEDIA QUERIES
+   ====================== */
+
+/* Small screens and up (large phones) */
+@media (min-width: 30rem) {
+    :root {
+        font-size: 1.1rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-lg);
+    }
+    
+    /* Navigation improvements for larger phones */
+    #menu a {
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Medium screens and up (tablets) */
+@media (min-width: 48rem) {
+    :root {
+        font-size: 1.125rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-xl);
+    }
+    
+    /* Enhanced navigation for tablets */
+    #menu {
+        overflow-x: visible;
+        white-space: normal;
+    }
+    
+    #menu a {
+        margin: var(--spacing-xs);
+    }
+    
+    /* Back to top button positioning */
+    .top-link {
+        bottom: var(--spacing-xl);
+        right: var(--spacing-xl);
+    }
+}
+
+/* Large screens and up (desktop) */
+@media (min-width: 64rem) {
+    .container {
+        padding: 0 var(--spacing-xxl);
+    }
+    
+    /* Desktop-optimized navigation */
+    #menu li + li {
+        margin-inline-start: var(--spacing-md);
+    }
+    
+    /* Larger back to top button for desktop */
+    .top-link {
+        width: 3.5rem;
+        height: 3.5rem;
+        bottom: 2rem;
+        right: 2rem;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 80rem) {
+    h1 {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+/* ======================
+   ACCESSIBILITY MEDIA QUERIES
+   ====================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .top-link:hover,
+    .top-link:focus,
+    #menu a:hover,
+    button#theme-toggle:hover {
+        transform: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --contrast-border: 3px solid currentColor;
+    }
+    
+    .top-link:focus,
+    #menu a:focus,
+    button#theme-toggle:focus {
+        outline: var(--contrast-border) !important;
+        outline-offset: 2px !important;
+    }
+}
+
+/* ======================
+   PRINT STYLES
+   ====================== */
+
+@media print {
+    /* Hide interactive elements */
+    .top-link,
+    button#theme-toggle,
+    #menu {
+        display: none !important;
+    }
+    
+    /* Optimize typography for print */
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: black !important;
+        background: white !important;
+    }
+    
+    /* Ensure links are visible in print */
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+    
+    /* Page break optimization */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    
+    img {
+        page-break-inside: avoid;
+    }
+}
