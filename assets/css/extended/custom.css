@@ -372,6 +372,66 @@ a:focus, button:focus, input:focus, textarea:focus {
     :root {
         --font-size-base: 18px; /* Slightly larger on mobile */
     }
+    
+    /* Left-align headers, navbar, and navigation elements */
+    .post-title,
+    .page-title,
+    h1, h2, h3 {
+        text-align: left;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    /* Align header and navigation elements */
+    .header,
+    .header .logo,
+    .header nav,
+    #menu {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    /* Ensure navbar items align properly */
+    .header nav ul,
+    .header nav li,
+    #menu ul,
+    #menu li {
+        padding-left: 0;
+        margin-left: 0;
+    }
+    
+    /* Align navbar links */
+    .header nav a,
+    #menu a {
+        padding-left: 0;
+        padding-right: 0.25rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+    
+    /* Reduce overall navbar padding for better alignment */
+    .header nav,
+    #menu,
+    .nav {
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Remove any extra spacing from navbar items */
+    .header nav ul,
+    .header nav li,
+    #menu ul,
+    #menu li {
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Align main content to match */
+    .post-content,
+    .page-content {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }
 
 /* Override any theme-specific font families for compliance */
