@@ -158,9 +158,31 @@ button#theme-toggle svg {
 
 /* ======================
    NAVIGATION - MOBILE FIRST
+   Left-aligned nav with theme toggle on right
    ====================== */
 
+/* Navigation container - custom layout */
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+/* Left side: Logo + Main Menu grouped together */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex: 1;
+}
+
 /* Logo accessibility */
+.logo {
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
 .logo a {
     transition: opacity 0.2s ease, transform 0.1s ease;
     text-decoration: none;
@@ -181,16 +203,18 @@ button#theme-toggle svg {
     transform: translateY(0px);
 }
 
-/* Menu - mobile first design */
+/* Main menu - aligned with logo */
 #menu {
     list-style: none;
-    word-break: keep-all;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.25rem 0;
-    scroll-padding: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
+/* Menu items */
 #menu a {
     transition: all 0.2s ease;
     text-decoration: none;
@@ -198,9 +222,9 @@ button#theme-toggle svg {
     border-radius: 0.375rem;
     display: inline-flex;
     align-items: center;
-    margin: 0.125rem;
     line-height: 1.4;
     min-height: var(--min-touch-target);
+    white-space: nowrap;
 }
 
 #menu a:hover {
@@ -229,12 +253,20 @@ button#theme-toggle svg {
 }
 
 #menu li {
-    display: inline-block;
-    margin: 0 0.125rem;
+    margin: 0;
 }
 
-#menu li + li {
-    margin-inline-start: calc(var(--spacing-sm) - 0.25rem);
+/* Theme toggle - positioned on the right */
+.logo-switches {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: auto; /* Push to the right */
+}
+
+/* Override theme's default spacing */
+button#theme-toggle {
+    margin: 0; /* Remove default margin */
 }
 
 /* ======================
@@ -296,9 +328,12 @@ button#theme-toggle svg {
 
 /* Small screens and up (30rem = 480px) */
 @media (min-width: 30rem) {
+    .nav-left {
+        gap: var(--spacing-xl); /* More space between logo and menu on larger phones */
+    }
+    
     #menu a {
         padding: 0.75rem 1rem;
-        margin: 0.1875rem;
     }
     
     .top-link {
@@ -309,9 +344,17 @@ button#theme-toggle svg {
 
 /* Medium screens and up (48rem = 768px) */
 @media (min-width: 48rem) {
+    /* Navigation becomes more spacious */
+    .nav {
+        gap: var(--spacing-lg);
+    }
+    
+    .nav-left {
+        gap: var(--spacing-xxl); /* Even more space on tablets */
+    }
+    
     #menu {
-        overflow-x: visible;
-        white-space: normal;
+        gap: var(--spacing-sm); /* More space between menu items */
     }
     
     #menu a {
@@ -328,13 +371,44 @@ button#theme-toggle svg {
 
 /* Large screens and up (64rem = 1024px) */
 @media (min-width: 64rem) {
-    #menu li + li {
-        margin-inline-start: var(--spacing-md);
+    .nav-left {
+        gap: 3rem; /* Fixed gap on desktop for consistency */
+    }
+    
+    #menu {
+        gap: var(--spacing-md); /* Comfortable spacing on desktop */
     }
     
     .top-link {
         bottom: 2rem;
         right: 2rem;
+    }
+}
+
+/* Mobile-specific: Keep logo and menu aligned horizontally */
+@media (max-width: 29.9375rem) { /* Below 30rem */
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .nav-left {
+        width: 100%;
+        flex-direction: row; /* Keep logo and menu on same horizontal line */
+        align-items: center;
+        gap: var(--spacing-md);
+        flex-wrap: wrap; /* Allow wrapping if needed */
+    }
+    
+    #menu {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    .logo-switches {
+        align-self: flex-end; /* Theme toggle stays on the right even when stacked */
+        margin-left: 0;
     }
 }
 
