@@ -1,73 +1,188 @@
-/* ADA/Section 508 Compliant Typography */
+/* ======================
+   ADA/SECTION 508 COMPLIANT STYLES
+   Mobile-First Responsive Design
+   ====================== */
 
-/* Import accessible sans-serif fonts */
+/* Import accessible fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Section 508 Compliant Font Stack - Sans-serif required */
+/* Accessibility-first CSS custom properties */
 :root {
+    /* Typography scale - mobile first */
     --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-    --font-size-base: 16px; /* Minimum readable size for accessibility */
+    --font-size-base: 1rem; /* 16px - minimum readable size */
     --line-height-body: 1.7; /* Enhanced readability */
+    
+    /* Accessible interaction targets */
+    --min-touch-target: 2.75rem; /* 44px */
+    --focus-ring: 0.125rem solid #0066cc; /* 2px */
+    --focus-ring-offset: 0.125rem; /* 2px */
+    
+    /* Spacing system */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
 }
 
 /* ======================
-   ADA COMPLIANT THEME TOGGLE 
+   BASE TYPOGRAPHY & ACCESSIBILITY
    ====================== */
 
-/* Fix theme toggle accessibility issues */
+/* Mobile-first base styles */
+body, .main {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+}
+
+/* Responsive headings using clamp() for fluid typography */
+h1 {
+    font-family: var(--font-family-body);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-family: var(--font-family-body);
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-family: var(--font-family-body);
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5em;
+}
+
+h4, h5, h6 {
+    font-family: var(--font-family-body);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5em;
+}
+
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* Enhanced readability for content */
+p {
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-body);
+}
+
+/* Lists with proper spacing */
+ul, ol {
+    line-height: var(--line-height-body);
+    margin-bottom: var(--spacing-lg);
+}
+
+li {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Accessible links */
+a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* ======================
+   ACCESSIBLE INTERACTIVE ELEMENTS
+   ====================== */
+
+/* Universal focus indicators */
+a:focus, 
+button:focus, 
+input:focus, 
+textarea:focus,
+select:focus {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+}
+
+/* Minimum touch targets for all interactive elements */
+button, 
+a, 
+input, 
+select, 
+textarea {
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
+}
+
+/* ======================
+   THEME TOGGLE - MOBILE FIRST
+   ====================== */
+
 button#theme-toggle {
-    /* ADA Requirement: Minimum 44x44px touch target */
-    min-width: 44px !important;
-    min-height: 44px !important;
-    
-    /* Ensure proper padding for touch targets */
-    padding: 10px !important;
-    
-    /* Better visual feedback */
-    border-radius: 6px;
+    min-width: var(--min-touch-target);
+    min-height: var(--min-touch-target);
+    padding: 0.625rem;
+    border-radius: 0.375rem;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* CRITICAL: Restore focus indicators for keyboard navigation */
 button#theme-toggle:focus {
-    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
-    outline-offset: 2px !important;
-    background-color: rgba(0, 102, 204, 0.1) !important;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    background-color: rgba(0, 102, 204, 0.1);
 }
 
-/* Enhanced hover states for better usability */
 button#theme-toggle:hover {
     background-color: rgba(128, 128, 128, 0.1);
     transform: scale(1.05);
 }
 
-/* Active state feedback */
 button#theme-toggle:active {
     transform: scale(0.95);
 }
 
-/* Ensure icons are properly sized within the accessible button */
 button#theme-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     display: block;
     margin: auto;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    button#theme-toggle:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
-    }
-}
-
 /* ======================
-   ADA COMPLIANT NAVBAR STYLING 
+   NAVIGATION - MOBILE FIRST
+   Left-aligned nav with theme toggle on right
    ====================== */
 
-/* Logo/Brand link styling - consistent with theme */
+/* Navigation container - custom layout */
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+/* Left side: Logo + Main Menu grouped together */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex: 1;
+}
+
+/* Logo accessibility */
+.logo {
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
 .logo a {
     transition: opacity 0.2s ease, transform 0.1s ease;
     text-decoration: none;
@@ -79,99 +194,240 @@ button#theme-toggle svg {
 }
 
 .logo a:focus {
-    outline: 2px solid #0066cc !important;
-    outline-offset: 3px !important;
-    border-radius: 4px;
+    outline: var(--focus-ring);
+    outline-offset: 0.1875rem;
+    border-radius: 0.25rem;
 }
 
 .logo a:active {
     transform: translateY(0px);
 }
 
-/* Menu navigation links - matching logo styling */
+/* Main menu - aligned with logo */
+#menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Menu items */
 #menu a {
     transition: all 0.2s ease;
     text-decoration: none;
-    padding: 10px 12px; /* Increased padding for complete outline coverage */
-    border-radius: 6px; /* Slightly larger border radius */
-    display: inline-block;
-    position: relative;
-    /* Ensure the element has enough space for the outline */
-    margin: 2px; /* Small margin to prevent outline clipping */
-    line-height: 1.4; /* Better line height for consistent button size */
+    padding: var(--spacing-sm) 0.75rem;
+    border-radius: 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.4;
+    min-height: var(--min-touch-target);
+    white-space: nowrap;
 }
 
-/* Menu link hover states - same as logo */
 #menu a:hover {
     opacity: 0.8;
     transform: translateY(-1px);
     background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* Menu link focus states - ADA compliant with complete outline */
 #menu a:focus {
-    outline: 2px solid #0066cc !important;
-    outline-offset: 1px !important; /* Reduced offset for better containment */
+    outline: var(--focus-ring);
+    outline-offset: 0.0625rem;
     background-color: rgba(0, 102, 204, 0.1);
-    /* Ensure outline doesn't get clipped */
-    box-shadow: 0 0 0 1px rgba(0, 102, 204, 0.2); /* Additional visual indicator */
+    box-shadow: 0 0 0 1px rgba(0, 102, 204, 0.2);
 }
 
-/* Menu link active states */
 #menu a:active {
     transform: translateY(0px);
 }
 
-/* Enhanced active state for current page */
+/* Active menu state */
 #menu .active {
     font-weight: 500;
     border-bottom: 2px solid currentColor;
     background-color: rgba(0, 102, 204, 0.05);
-    /* Ensure active state works with the new padding */
-    padding-bottom: 8px; /* Adjust for border-bottom */
+    padding-bottom: 0.5rem;
 }
 
-/* Ensure minimum touch target size for mobile */
-@media (max-width: 768px) {
+#menu li {
+    margin: 0;
+}
+
+/* Theme toggle - positioned on the right */
+.logo-switches {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: auto; /* Push to the right */
+}
+
+/* Override theme's default spacing */
+button#theme-toggle {
+    margin: 0; /* Remove default margin */
+}
+
+/* ======================
+   BACK TO TOP BUTTON - MOBILE FIRST
+   ====================== */
+
+.top-link {
+    visibility: hidden;
+    position: fixed;
+    bottom: 3.75rem;
+    right: 1.25rem;
+    z-index: 99;
+    background: var(--tertiary);
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    transition: visibility 0.5s, opacity 0.8s linear, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.top-link[style*="visibility: visible"],
+.top-link.show {
+    visibility: visible;
+}
+
+.top-link:focus {
+    outline: var(--focus-ring);
+    outline-offset: 0.1875rem;
+    background-color: var(--primary);
+    color: var(--theme);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.top-link:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.top-link:active {
+    transform: scale(0.95);
+}
+
+.top-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
+    filter: drop-shadow(0px 0px 0px var(--theme));
+}
+
+/* ======================
+   RESPONSIVE MEDIA QUERIES - MOBILE FIRST
+   ====================== */
+
+/* Small screens and up (30rem = 480px) */
+@media (min-width: 30rem) {
+    .nav-left {
+        gap: var(--spacing-xl); /* More space between logo and menu on larger phones */
+    }
+    
     #menu a {
-        padding: 12px 16px; /* Increased horizontal padding on mobile */
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        margin: 3px; /* Slightly more margin on mobile */
+        padding: 0.75rem 1rem;
+    }
+    
+    .top-link {
+        bottom: 4rem;
+        right: 1.5rem;
     }
 }
 
-/* Menu container adjustments to prevent outline clipping */
-#menu {
-    list-style: none;
-    word-break: keep-all;
-    overflow-x: auto;
-    white-space: nowrap;
-    /* Add padding to container to prevent focus outline clipping */
-    padding: 4px 0 !important;
-    /* Ensure scrolling doesn't cut off focus indicators */
-    scroll-padding: 4px;
+/* Medium screens and up (48rem = 768px) */
+@media (min-width: 48rem) {
+    /* Navigation becomes more spacious */
+    .nav {
+        gap: var(--spacing-lg);
+    }
+    
+    .nav-left {
+        gap: var(--spacing-xxl); /* Even more space on tablets */
+    }
+    
+    #menu {
+        gap: var(--spacing-sm); /* More space between menu items */
+    }
+    
+    #menu a {
+        margin: var(--spacing-xs);
+    }
+    
+    .top-link {
+        bottom: var(--spacing-xl);
+        right: var(--spacing-xl);
+        width: 3.5rem;
+        height: 3.5rem;
+    }
 }
 
-/* Menu list items - ensure proper spacing */
-#menu li {
-    display: inline-block;
-    /* Add small margin to prevent outline overlap */
-    margin: 0 2px;
+/* Large screens and up (64rem = 1024px) */
+@media (min-width: 64rem) {
+    .nav-left {
+        gap: 3rem; /* Fixed gap on desktop for consistency */
+    }
+    
+    #menu {
+        gap: var(--spacing-md); /* Comfortable spacing on desktop */
+    }
+    
+    .top-link {
+        bottom: 2rem;
+        right: 2rem;
+    }
 }
 
-/* Override theme's margin between menu items */
-#menu li + li {
-    margin-inline-start: calc(var(--gap) - 4px); /* Adjust for our new margins */
+/* Mobile-specific: Keep logo and menu aligned horizontally */
+@media (max-width: 29.9375rem) { /* Below 30rem */
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .nav-left {
+        width: 100%;
+        flex-direction: row; /* Keep logo and menu on same horizontal line */
+        align-items: center;
+        gap: var(--spacing-md);
+        flex-wrap: wrap; /* Allow wrapping if needed */
+    }
+    
+    #menu {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    .logo-switches {
+        align-self: flex-end; /* Theme toggle stays on the right even when stacked */
+        margin-left: 0;
+    }
 }
 
-/* High contrast mode enhancements */
+/* ======================
+   ACCESSIBILITY MEDIA QUERIES
+   ====================== */
+
+/* High contrast mode support */
 @media (prefers-contrast: high) {
+    button#theme-toggle:focus,
     .logo a:focus,
-    #menu a:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
+    #menu a:focus,
+    .top-link:focus {
+        outline: 3px solid currentColor;
+        outline-offset: var(--focus-ring-offset);
+    }
+    
+    .top-link {
+        border: 2px solid currentColor;
     }
     
     #menu a:hover {
@@ -183,224 +439,52 @@ button#theme-toggle svg {
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     .logo a,
-    #menu a {
+    #menu a,
+    button#theme-toggle,
+    .top-link {
         transition: none;
     }
     
     .logo a:hover,
-    #menu a:hover {
-        transform: none;
-    }
-}
-
-/* ======================
-   ADA COMPLIANT "BACK TO TOP" BUTTON 
-   ====================== */
-
-/* Fix the top-link accessibility issues */
-.top-link {
-    /* Ensure it's always focusable when visible */
-    visibility: hidden;
-    position: fixed;
-    bottom: 60px;
-    right: 30px;
-    z-index: 99;
-    background: var(--tertiary);
-    width: 48px !important; /* Increase to meet 44px minimum */
-    height: 48px !important; /* Increase to meet 44px minimum */
-    padding: 12px;
-    border-radius: 50%;
-    transition: visibility 0.5s, opacity 0.8s linear, transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* Ensure it can receive focus */
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    
-    /* Add subtle shadow for better visibility */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* When visible, ensure it's focusable and in tab order */
-.top-link[style*="visibility: visible"],
-.top-link.show {
-    visibility: visible !important;
-    /* JavaScript will handle tabindex management */
-}
-
-/* CRITICAL: Restore focus indicators */
-.top-link:focus {
-    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
-    outline-offset: 3px !important;
-    background-color: var(--primary) !important;
-    color: var(--theme) !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-}
-
-/* Enhanced hover state */
-.top-link:hover {
-    color: var(--primary);
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Active state */
-.top-link:active {
-    transform: scale(0.95);
-}
-
-/* Ensure the SVG icon is properly sized and accessible */
-.top-link svg {
-    width: 20px;
-    height: 20px;
-    display: block;
-    filter: drop-shadow(0px 0px 0px var(--theme));
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .top-link:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
-    }
-    
-    .top-link {
-        border: 2px solid currentColor;
-    }
-}
-
-/* Reduced motion support for top-link */
-@media (prefers-reduced-motion: reduce) {
-    .top-link {
-        transition: visibility 0.5s, opacity 0.8s linear; /* Keep only essential transitions */
-    }
-    
+    #menu a:hover,
+    button#theme-toggle:hover,
     .top-link:hover,
     .top-link:focus {
         transform: none;
     }
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .top-link {
-        bottom: 80px;
-        right: 20px;
-        width: 50px !important;
-        height: 50px !important;
-    }
-}
+/* ======================
+   PRINT STYLES
+   ====================== */
 
-/* Body text - Sans-serif as required by Section 508 */
-body, .main {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-}
-
-/* Headers - Sans-serif with good contrast hierarchy */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-body);
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 0.5em;
-}
-
-/* Specific header sizes for accessibility */
-h1 { font-size: 2.25rem; } /* 36px */
-h2 { font-size: 1.875rem; } /* 30px */
-h3 { font-size: 1.5rem; } /* 24px */
-h4 { font-size: 1.25rem; } /* 20px */
-h5 { font-size: 1.125rem; } /* 18px */
-h6 { font-size: 1rem; } /* 16px */
-
-/* Code blocks - Keep monospace for technical content */
-code, pre, .highlight, kbd, samp {
-    font-family: var(--font-family-mono);
-    font-size: 0.875rem; /* 14px - not too small */
-    font-weight: 400;
-}
-
-/* Navigation and UI - Sans-serif */
-.nav, .menu, .breadcrumbs {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 500;
-}
-
-/* Blog post content - Optimized for reading */
-.post-content, .page-content, .post-single .post-content {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-}
-
-/* Paragraphs - Enhanced spacing for readability */
-p {
-    margin-bottom: 1.5rem;
-    line-height: var(--line-height-body);
-}
-
-/* Lists - Accessible formatting */
-ul, ol {
-    line-height: var(--line-height-body);
-    margin-bottom: 1.5rem;
-}
-
-li {
-    margin-bottom: 0.5rem;
-}
-
-/* Links - Ensure they're distinguishable */
-a {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-}
-
-/* Focus indicators for keyboard navigation */
-a:focus, button:focus, input:focus, textarea:focus {
-    outline: 2px solid #0066cc;
-    outline-offset: 2px;
-}
-
-/* Ensure text can be resized to 200% without loss of functionality */
-@media (max-width: 768px) {
-    :root {
-        --font-size-base: 18px; /* Slightly larger on mobile */
-    }
-}
-
-/* Override any theme-specific font families for compliance */
-*, *::before, *::after {
-    font-family: inherit;
-}
-
-/* Specific overrides for PaperMod theme elements */
-.post-title, .page-title {
-    font-family: var(--font-family-body) !important;
-}
-
-.post-meta, .post-description {
-    font-family: var(--font-family-body) !important;
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-/* Accessibility: Ensure minimum touch target size */
-button, a, input, select, textarea {
-    min-height: 44px;
-    min-width: 44px;
-}
-
-/* Print styles - Maintain accessibility in print */
 @media print {
+    .top-link,
+    button#theme-toggle,
+    #menu {
+        display: none;
+    }
+    
     body {
         font-family: var(--font-family-body);
         font-size: 12pt;
         line-height: 1.6;
+        color: black;
+        background: white;
+    }
+    
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    
+    img {
+        page-break-inside: avoid;
     }
 }

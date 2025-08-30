@@ -1,4 +1,6 @@
 /* Imports Local CSS Files to override PaperMod theme's default styling */
+/* Mobile-first responsive design system */
+@import 'responsive.css';
 @import 'custom.css';
 @import 'profile.css';
 @import 'callouts.css';

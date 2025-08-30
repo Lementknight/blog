@@ -1,13 +1,34 @@
+/* ======================
+   RESPONSIVE PROFILE IMAGES
+   Mobile-First Design
+   ====================== */
+
+/* Profile images - mobile first approach */
 .profile img,
 .profile .profile_inner img,
 img[src*="profile"],
 img[src*="profile_hu"],
 img[alt*="Caleb"] {
-    object-fit: cover !important;
-    object-position: 90% center !important;
-    /* Force dimensions override any theme constraints */
-    max-width: 300px !important;
-    max-height: 200px !important;
-    min-width: 200px !important;
-    min-height: 300px !important;
+    /* Base responsive behavior */
+    object-fit: cover;
+    object-position: 90% center;
+    max-width: 100%;
+    
+    /* Mobile dimensions - fluid and responsive */
+    width: clamp(12.5rem, 40vw, 15rem); /* 200px - 240px */
+    aspect-ratio: 1/1; /* Perfect square for circular shape */
+    border-radius: 50%; /* Make it circular */
+}
+
+/* Medium screens and up (48rem = 768px) */
+@media (min-width: 48rem) {
+    .profile img,
+    .profile .profile_inner img,
+    img[src*="profile"],
+    img[src*="profile_hu"],
+    img[alt*="Caleb"] {
+        /* Desktop dimensions - maintain circular shape */
+        width: clamp(12.5rem, 25vw, 18.75rem); /* 200px - 300px */
+        aspect-ratio: 1/1; /* Keep perfect square for circular shape */
+    }
 }
