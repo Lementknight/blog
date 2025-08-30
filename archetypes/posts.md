@@ -5,3 +5,6 @@ date: '{{ .Date }}'
 description: ''
 draft: true
 ---
+
+
+{{ partial "giscus.html" }}
