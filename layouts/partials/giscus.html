@@ -1,0 +1,10 @@
+<div class="post-footer">
+  {{ partial "custom/footer-post.html" . }}
+</div>
+    {{- partial "social-share" (dict "Context" . "Class" "share-icons" "Title" "" "Whatsapp" false "Telegram" false "Linkedin" true "Pinterest" false "Tumblr" false "Vk" false "Facebook" false) -}}
+  <div class="comments aligncenter">
+    {{ partial "giscus.html" . }}
+  </div>
+<div class="jedi">
+  {{ partial "custom/jedi.html" . }}
+</div>
