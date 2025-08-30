@@ -6,18 +6,68 @@
                 <script src="https://giscus.app/client.js"
                     data-repo="Lementknight/blog"
                     data-repo-id="R_kgDONw3w3A"
-                    data-category="General"
-                    data-category-id="DIC_kwDONw3w3M4CuwJI"
-                    data-mapping="url"
+                    data-category="Blog Discussions"
+                    data-category-id="DIC_kwDONw3w3M4CuwY0"
+                    data-mapping="specific"
+                    data-term="{{ .Title }}"
                     data-strict="1"
                     data-reactions-enabled="1"
                     data-emit-metadata="1"
                     data-input-position="bottom"
-                    data-theme="{{ .Site.Params.giscusTheme }}"
+                    data-theme="preferred_color_scheme"
                     data-lang="en"
                     data-loading="lazy"
                     crossorigin="anonymous"
                     async>
+                </script>
+                
+                <script>
+                    // Function to update Giscus theme
+                    function updateGiscusTheme() {
+                        const theme = document.body.className.includes('dark') ? 'dark' : 'light';
+                        const iframe = document.querySelector('iframe.giscus-frame');
+                        
+                        if (iframe) {
+                            iframe.contentWindow.postMessage({
+                                giscus: {
+                                    setConfig: {
+                                        theme: theme
+                                    }
+                                }
+                            }, 'https://giscus.app');
+                        }
+                    }
+                    
+                    // Wait for Giscus to load, then sync theme
+                    document.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(() => {
+                            updateGiscusTheme();
+                        }, 1000);
+                    });
+                    
+                    // Listen for theme toggle clicks
+                    const themeToggle = document.getElementById('theme-toggle');
+                    if (themeToggle) {
+                        themeToggle.addEventListener('click', function() {
+                            setTimeout(() => {
+                                updateGiscusTheme();
+                            }, 100);
+                        });
+                    }
+                    
+                    // Also listen for any changes to body class (in case theme changes via other methods)
+                    const observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                updateGiscusTheme();
+                            }
+                        });
+                    });
+                    
+                    observer.observe(document.body, {
+                        attributes: true,
+                        attributeFilter: ['class']
+                    });
                 </script>
             </div>
         {{- end -}}

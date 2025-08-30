@@ -24,7 +24,8 @@ params:
       repoId: "R_kgDONw3w3A" # You'll need to get this from Giscus
       category: "General"
       categoryId: "DIC_kwDONw3w3M4CuwJI" # You'll need to get this from Giscus
-      mapping: "pathname"
+      mapping: "specific"
+      data-term: "title"
       reactionsEnabled: "1"
       emitMetadata: "0"
       theme: "preferred_color_scheme"
