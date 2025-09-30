@@ -12,6 +12,11 @@ This week, I'll show you exactly how to build upon the Nox setup we covered prev
 
 To make this easier to follow along, I've created a starter repository template that includes all the files we'll be working with. You can find it here: [Python CI/CD Tutorial Starter Repo](https://github.com/Lementknight/Python-Github-Actions-Ci-Cd-Tutorial-Starter-Repo). Feel free to use it as your starting point!
 
+## What is a CI/CD Pipeline
+
+Before we get started, let's define what CI/CD stands for. CI/CD stands continuous integration / continuous deployment and is the process of deploying new features from your local machine to the production environment. CI/CD pipelines are very import for code bases because they act as the quality control and manufactures of new code for a codebase. CI/CD jobs are a very important principal of DevOps and Backend Engineering
+
+
 ## Setting Up Your Project Foundation
 
 Before we dive into GitHub Actions, let's make sure your project has the essential files. If you followed my previous Nox tutorial, you might already have some of these!
