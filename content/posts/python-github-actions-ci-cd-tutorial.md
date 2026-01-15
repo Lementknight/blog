@@ -22,6 +22,7 @@ Before we get started, let's define what CI/CD stands for. CI/CD stands continuo
 Before we dive into GitHub Actions, let's make sure your project has the essential files. If you followed my previous Nox tutorial, you might already have some of these!
 
 First, you'll need a `requirements.txt` file in your project root with these development dependencies:
+
 ```txt
 nox
 ruff

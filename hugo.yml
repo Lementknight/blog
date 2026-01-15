@@ -40,7 +40,7 @@ params:
   profileMode:
     enabled: true
     # title: "Caleb Aguirre-Leon's Website" # optional default will be site title
-    subtitle: "Welcome to my website 👋  \n Below you can find links to my GitHub Page, my personal music, and my email"
+    subtitle: "Hey there! 👋  \n In my blog I share my stories about my journey in software engineer ranging from my internships with Google and IBM to leading a dev team for my college's hackathon organization"
     imageUrl: "/images/profile.jpeg" # Static image - no compression
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
     imageWidth: 300 # custom size
@@ -49,8 +49,10 @@ params:
   socialIcons: # optional
     - name: "GitHub"
       url: "https://github.com/Lementknight"
-    - name: "Spotify"
-      url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
+    - name: "unsplash"
+      url: "https://flic.kr/ps/46EKnC"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/caleb-aguirre-leon/"
     - name: "email"
       url: "mailto:calebaguirreleon@gmail.com"
 
