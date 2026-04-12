@@ -324,7 +324,14 @@ h6 { font-size: 1rem; } /* 16px */
 
 [data-theme="dark"] .post-content .highlight,
 [data-theme="dark"] .post-content div.highlight {
-    background: rgb(35, 37, 39) !important;
+    background: #1e1e2e !important; /* Catppuccin Mocha base */
+}
+
+/* Light-mode code block background — change this value to test different shades.
+   Paired with Catppuccin Latte syntax colors in assets/css/extended/chroma-light.css */
+[data-theme="light"] .post-content .highlight,
+[data-theme="light"] .post-content div.highlight {
+    background: #eff1f5 !important;
 }
 
 /* Kill PaperMod's duplicate background on the inner <code> so .highlight owns it */

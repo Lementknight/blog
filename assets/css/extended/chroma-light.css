@@ -1,0 +1,125 @@
+/* Catppuccin Frappe-inspired Light Theme with enhanced contrast */
+
+/* Base and background */
+[data-theme="light"] .chroma { color: #4a4f59 !important; background-color: #eff1f5; }
+[data-theme="light"] .bg { color: #4a4f59 !important; background-color: #eff1f5; }
+
+/* Catch-all for any text that doesn't have a class */
+[data-theme="light"] .chroma { 
+  color: #4a4f59 !important; 
+}
+
+[data-theme="light"] .chroma > * {
+  color: #4a4f59 !important;
+}
+
+/* Error highlighting */
+[data-theme="light"] .err { color: #e78284; background-color: #f4e5e5; font-weight: bold; }
+
+/* Line styling */
+[data-theme="light"] .lnlinks { outline: none; text-decoration: none; color: inherit; }
+[data-theme="light"] .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
+[data-theme="light"] .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
+[data-theme="light"] .hl { background-color: #e6e9ef; }
+[data-theme="light"] .lnt { white-space: pre; -webkit-user-select: none; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em; color: #4a4f59; }
+[data-theme="light"] .ln { white-space: pre; -webkit-user-select: none; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em; color: #4a4f59; }
+[data-theme="light"] .line { display: flex; }
+
+/* Keywords */
+[data-theme="light"] .k { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kc { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kd { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kn { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kp { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kr { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .kt { color: #e9a12b; font-weight: bold; }
+
+/* Names and identifiers */
+[data-theme="light"] .n { color: #4a4f59 !important; }
+[data-theme="light"] .na { color: #2563eb; }
+[data-theme="light"] .nb { color: #2563eb; }
+[data-theme="light"] .bp { color: #4a4f59 !important; }
+[data-theme="light"] .nc { color: #e9a12b; font-weight: bold; }
+[data-theme="light"] .no { color: #ef8354; }
+[data-theme="light"] .nd { color: #2563eb; font-weight: bold; }
+[data-theme="light"] .ni { color: #ea76cb; }
+[data-theme="light"] .ne { color: #e78284; font-weight: bold; }
+[data-theme="light"] .nf { color: #2563eb; font-weight: bold; }
+[data-theme="light"] .fm { color: #2563eb; }
+[data-theme="light"] .nl { color: #4a4f59 !important; font-weight: bold; }
+[data-theme="light"] .nn { color: #4a4f59 !important; }
+[data-theme="light"] .nx { color: #4a4f59 !important; }
+[data-theme="light"] .py { color: #2563eb; }
+[data-theme="light"] .nt { color: #8b5cf6; font-weight: bold; }
+[data-theme="light"] .nv { color: #ea76cb; }
+[data-theme="light"] .vc { color: #ea76cb; }
+[data-theme="light"] .vg { color: #ea76cb; }
+[data-theme="light"] .vi { color: #ea76cb; }
+[data-theme="light"] .vm { color: #ea76cb; }
+
+/* Literals and strings */
+[data-theme="light"] .l { color: #ef8354; }
+[data-theme="light"] .ld { color: #10b981; }
+[data-theme="light"] .s { color: #10b981; }
+[data-theme="light"] .sa { color: #10b981; }
+[data-theme="light"] .sb { color: #10b981; }
+[data-theme="light"] .sc { color: #10b981; }
+[data-theme="light"] .dl { color: #10b981; }
+[data-theme="light"] .sd { color: #10b981; font-style: italic; }
+[data-theme="light"] .s2 { color: #10b981; }
+[data-theme="light"] .se { color: #ef8354; font-weight: bold; }
+[data-theme="light"] .sh { color: #10b981; }
+[data-theme="light"] .si { color: #ef8354; }
+[data-theme="light"] .sx { color: #10b981; }
+[data-theme="light"] .sr { color: #06b6d4; }
+[data-theme="light"] .s1 { color: #10b981; }
+[data-theme="light"] .ss { color: #ea76cb; }
+
+/* Numbers */
+[data-theme="light"] .m { color: #ef8354; }
+[data-theme="light"] .mb { color: #ef8354; }
+[data-theme="light"] .mf { color: #ef8354; }
+[data-theme="light"] .mh { color: #ef8354; }
+[data-theme="light"] .mi { color: #ef8354; }
+[data-theme="light"] .il { color: #ef8354; }
+[data-theme="light"] .mo { color: #ef8354; }
+
+/* Operators */
+[data-theme="light"] .o { color: #06b6d4; font-weight: bold; }
+[data-theme="light"] .ow { color: #06b6d4; font-weight: bold; }
+
+/* Punctuation */
+[data-theme="light"] .p { color: #4a4f59; }
+
+/* Comments */
+[data-theme="light"] .c { color: #4a4f59; font-style: italic; }
+[data-theme="light"] .ch { color: #4a4f59; font-style: italic; }
+[data-theme="light"] .cm { color: #4a4f59; font-style: italic; }
+[data-theme="light"] .c1 { color: #4a4f59; font-style: italic; }
+[data-theme="light"] .cs { color: #4a4f59; font-style: italic; }
+[data-theme="light"] .cp { color: #8b5cf6; font-style: italic; }
+.cpf { color: #8b5cf6; font-style: italic; }
+
+/* Generic */
+.gd { color: #e78284; background-color: #f4e5e5; }
+.ge { font-style: italic; }
+.gr { color: #e78284; }
+.gh { color: #2563eb; font-weight: bold; }
+.gi { color: #10b981; background-color: #d6f4e8; }
+.go { color: #4a4f59; }
+.gp { color: #4a4f59; font-weight: bold; }
+.gs { font-weight: bold; }
+.gu { color: #2563eb; font-weight: bold; }
+.gt { color: #e78284; }
+.gl { text-decoration: underline; }
+
+/* Whitespace */
+.w { color: #4a4f59 !important; }
+
+/* Default color for any unclassified text */
+.chroma > * { color: #4a4f59 !important; }
+.highlight { color: #4a4f59 !important; }
+
+/* Dark mode overrides */
+[data-theme="dark"] .chroma { color: #cdd6f4; background-color: #1e1e2e; }
+[data-theme="dark"] .bg { color: #cdd6f4; background-color: #1e1e2e; }

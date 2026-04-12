@@ -7,3 +7,6 @@ preview:
 new_post:
 	@read -p "Post title (e.g. my-new-post): " name; \
 	hugo new content/posts/$$name.md
+
+debug:
+	rm -rf public && hugo server --disableFastRender --noHTTPCache
