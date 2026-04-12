@@ -11,18 +11,18 @@ Have a question about a post, or just want to say hi? Fill out the form below.
   <div style="margin-bottom: 1rem;">
     <label for="name" style="display:block; margin-bottom: .25rem;">Name</label>
     <input class="highlight" type="text" id="name" name="name" required
-      style="width:100%; padding:.5rem; border:1px solid var(--border); border-radius:4px; background:var(--entry); color:var(--primary);">
+      style="width:100%; padding:.5rem; border:1px solid #66668A; border-radius:4px; background:var(--entry); color:var(--primary);">
   </div>
   <div style="margin-bottom: 1rem;">
     <label for="email" style="display:block; margin-bottom: .25rem;">Email</label>
     <input class="highlight" type="email" id="email" name="email" required
-      style="width:100%; padding:.5rem; border:1px solid var(--border); border-radius:4px; background:var(--entry); color:var(--primary);">
+      style="width:100%; padding:.5rem; border:1px solid #66668A; border-radius:4px; background:var(--entry); color:var(--primary);">
   </div>
   <div style="margin-bottom: 1rem;">
     <label for="message" style="display:block; margin-bottom: .25rem;">Message</label>
     <textarea id="message" name="message" rows="6" required
       class="highlight"
-      style="width:100%; padding:.5rem; border:1px solid var(--border); border-radius:4px; background:var(--entry); color:var(--primary); resize:vertical;"></textarea>
+      style="width:100%; padding:.5rem; border:1px solid #66668A; border-radius:4px; background:var(--entry); color:var(--primary); resize:vertical;"></textarea>
   </div>
   <button type="submit"
     style="padding:.5rem 1.25rem; background:var(--primary); color:var(--theme); border:none; border-radius:4px; cursor:pointer; font-size:1rem;">

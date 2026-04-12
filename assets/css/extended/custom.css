@@ -339,7 +339,7 @@ h6 { font-size: 1rem; } /* 16px */
 /* Zensical-style code blocks — single source of truth for background on .highlight */
 .post-content .highlight,
 .post-content div.highlight {
-    border: 1px solid #444;
+    border: 1px solid #66668A;
     border-radius: 0.5rem !important;
     padding: 0.5rem 0;
 }
