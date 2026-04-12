@@ -37,7 +37,7 @@ markup:
 params:
   # Enable ADA compliant theme toggle
   disableThemeToggle: false
-  author: ["Caleb Aguirre-Leon"]
+  # author: ["Caleb Aguirre-Leon"]
   ShowCodeCopyButtons: false
   
   # Giscus comments configuration
