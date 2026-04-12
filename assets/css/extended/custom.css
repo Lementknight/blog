@@ -315,11 +315,35 @@ h4 { font-size: 1.25rem; } /* 20px */
 h5 { font-size: 1.125rem; } /* 18px */
 h6 { font-size: 1rem; } /* 16px */
 
-/* Material-style icon copy button — overrides PaperMod's text-based one */
+/* Zensical-style code blocks — single source of truth for background on .highlight */
+.post-content .highlight,
+.post-content div.highlight {
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 0;
+}
+
+[data-theme="dark"] .post-content .highlight,
+[data-theme="dark"] .post-content div.highlight {
+    background: rgb(35, 37, 39) !important;
+}
+
+/* Kill PaperMod's duplicate background on the inner <code> so .highlight owns it */
+.md-content pre code,
+.post-content pre code {
+    background: transparent !important;
+    padding: 0.75rem 1rem !important;
+}
+
+/* Material-style icon copy button — always visible, faint until hovered */
+div.highlight > .copy-code,
+pre > .copy-code {
+    display: block;
+}
+
 .copy-code {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 0.6rem;
+    right: 0.6rem;
     width: 1.75rem;
     height: 1.75rem;
     padding: 0;
@@ -327,15 +351,9 @@ h6 { font-size: 1rem; } /* 16px */
     border-radius: 0.25rem;
     background: transparent;
     color: var(--primary);
-    opacity: 0;
+    opacity: 0.45;
     cursor: pointer;
     transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-}
-
-.highlight:hover > .copy-code,
-pre:hover > .copy-code,
-.copy-code:focus-visible {
-    opacity: 0.55;
 }
 
 .copy-code:hover,
