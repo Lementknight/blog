@@ -167,7 +167,30 @@ jobs:
           fi
           
           echo "✅ Content validation successful"
-      
+
+      - name: Check for empty non-draft posts
+        run: |
+          echo "Checking for empty posts..."
+          empty_posts=()
+          for file in content/posts/*.md; do
+            [ -f "$file" ] || continue
+            # Skip drafts
+            if grep -qE '^draft:\s*true' "$file"; then
+              continue
+            fi
+            # Extract body after front matter (between --- delimiters)
+            body=$(awk '/^---$/{n++; next} n>=2' "$file" | sed '/^[[:space:]]*$/d' | sed '/^{{.*}}$/d')
+            if [ -z "$body" ]; then
+              empty_posts+=("$file")
+            fi
+          done
+          if [ ${#empty_posts[@]} -gt 0 ]; then
+            echo "❌ Found non-draft posts with no content:"
+            printf '  - %s\n' "${empty_posts[@]}"
+            exit 1
+          fi
+          echo "✅ No empty posts found"
+
       - name: Cache save
         id: cache-save
         uses: actions/cache/save@v5

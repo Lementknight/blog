@@ -12,6 +12,27 @@
 }
 
 /* ======================
+   SKIP TO MAIN CONTENT LINK
+   ====================== */
+
+/* Off-screen until focused — left-offset pattern keeps it in tab order */
+.skip-to-content {
+    position: absolute;
+    left: -999px;
+    z-index: 999;
+    padding: 2px;
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    left: 10px;
+    top: 30px;
+}
+
+/* ======================
    ADA COMPLIANT THEME TOGGLE 
    ====================== */
 
