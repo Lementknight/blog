@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize ARIA state based on current theme
-    const isDarkMode = document.body.className.includes('dark');
+    const isDarkMode = document.documentElement.dataset.theme === 'dark';
     updateThemeState(isDarkMode);
 
     // Enhanced click handler with accessibility features
     themeToggle.addEventListener('click', function(e) {
         // Don't prevent default - let original handler work
-        const wasDark = document.body.className.includes('dark');
+        const wasDark = document.documentElement.dataset.theme === 'dark';
         
         // Small delay to let original handler execute first
         setTimeout(function() {

@@ -24,7 +24,7 @@
                 <script>
                     // Function to update Giscus theme
                     function updateGiscusTheme() {
-                        const theme = document.body.className.includes('dark') ? 'dark' : 'light';
+                        const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
                         const iframe = document.querySelector('iframe.giscus-frame');
                         
                         if (iframe) {
@@ -55,18 +55,18 @@
                         });
                     }
                     
-                    // Also listen for any changes to body class (in case theme changes via other methods)
+                    // Also listen for any changes to html data-theme (in case theme changes via other methods)
                     const observer = new MutationObserver(function(mutations) {
                         mutations.forEach(function(mutation) {
-                            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
                                 updateGiscusTheme();
                             }
                         });
                     });
-                    
-                    observer.observe(document.body, {
+
+                    observer.observe(document.documentElement, {
                         attributes: true,
-                        attributeFilter: ['class']
+                        attributeFilter: ['data-theme']
                     });
                 </script>
             </div>
