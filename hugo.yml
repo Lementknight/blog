@@ -11,11 +11,34 @@ canonifyURLs: false
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
+# Output formats for RSS and other feeds
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+
+# Taxonomies for organizing content
+taxonomies:
+  tag: tags
+  category: categories
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    lineNos: false
+
 params:
   # Enable ADA compliant theme toggle
   disableThemeToggle: false
-  author: ["Caleb Aguirre-Leon"]
-  ShowCodeCopyButtons: true
+  # author: ["Caleb Aguirre-Leon"]
+  ShowCodeCopyButtons: false
   
   # Giscus comments configuration
   comments:
@@ -40,7 +63,7 @@ params:
   profileMode:
     enabled: true
     # title: "Caleb Aguirre-Leon's Website" # optional default will be site title
-    subtitle: "Welcome to my website 👋  \n Below you can find links to my GitHub Page, my personal music, and my email"
+    subtitle: "Hey there! 👋  \n In my blog I share my stories about my journey in software engineer ranging from my internships with Google and IBM to leading a dev team for my college's hackathon organization"
     imageUrl: "/images/profile.jpeg" # Static image - no compression
     imageTitle: "Caleb looking over to his left in front of a brick wall" # optional
     imageWidth: 300 # custom size
@@ -49,10 +72,10 @@ params:
   socialIcons: # optional
     - name: "GitHub"
       url: "https://github.com/Lementknight"
-    - name: "Spotify"
-      url: "https://open.spotify.com/artist/0Yp9pw7RNhxOuKz5l1dPXQ?si=zYxG1ahTT9CeSVGFf8S2pA"
-    - name: "email"
-      url: "mailto:calebaguirreleon@gmail.com"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/caleb-aguirre-leon/"
+    - name: "unsplash"
+      url: "https://flic.kr/ps/46EKnC"
 
 menu:
   main:
@@ -67,3 +90,7 @@ menu:
       name: Blog
       url: /posts/
       weight: 2
+    - identifier: Contact
+      name: Contact
+      url: /contact/
+      weight: 4

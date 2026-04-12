@@ -60,25 +60,25 @@ jobs:
   test-build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.148.2
-      GO_VERSION: 1.24.5
-      NODE_VERSION: 22.18.0
-    
+      HUGO_VERSION: 0.160.1
+      GO_VERSION: 1.26.2
+      NODE_VERSION: 22.22.2
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive  # Fetch Hugo themes
           fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
-      
+
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: false
-      
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       
@@ -110,7 +110,7 @@ jobs:
       
       - name: Cache restore
         id: cache-restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: hugo-test-${{ github.run_id }}-${{ github.sha }}
@@ -167,17 +167,40 @@ jobs:
           fi
           
           echo "✅ Content validation successful"
-      
+
+      - name: Check for empty non-draft posts
+        run: |
+          echo "Checking for empty posts..."
+          empty_posts=()
+          for file in content/posts/*.md; do
+            [ -f "$file" ] || continue
+            # Skip drafts
+            if grep -qE '^draft:\s*true' "$file"; then
+              continue
+            fi
+            # Extract body after front matter (between --- delimiters)
+            body=$(awk '/^---$/{n++; next} n>=2' "$file" | sed '/^[[:space:]]*$/d' | sed '/^{{.*}}$/d')
+            if [ -z "$body" ]; then
+              empty_posts+=("$file")
+            fi
+          done
+          if [ ${#empty_posts[@]} -gt 0 ]; then
+            echo "❌ Found non-draft posts with no content:"
+            printf '  - %s\n' "${empty_posts[@]}"
+            exit 1
+          fi
+          echo "✅ No empty posts found"
+
       - name: Cache save
         id: cache-save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
       
       - name: Upload build artifacts (on failure)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: hugo-build-logs
           path: |

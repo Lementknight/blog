@@ -11,11 +11,10 @@ Pages](https://pages.github.com/), a web hosting service offered by GitHub. The
 [GitHub Actions](https://github.com/features/actions) continuous integration service is used to
 deploy changes to the blog.
 
+> [!NOTE]
 > This post is based on Claudio Jolowicz's article
 > [Hosting a Hugo blog on GitHub Pages with Travis CI](https://cjolowicz.github.io/posts/hosting-a-hugo-blog-on-github-pages-with-travis-ci/).
-
-**_NOTE:_*📝**  
-The original tutorial was made before [GitHub Actions](https://github.com/features/actions) effectively replaced [Travis CI](https://www.travis-ci.com/)
+> The original tutorial was made before [GitHub Actions](https://github.com/features/actions) effectively replaced [Travis CI](https://www.travis-ci.com/)
 
 ## Contents
 

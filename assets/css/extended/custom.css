@@ -12,6 +12,27 @@
 }
 
 /* ======================
+   SKIP TO MAIN CONTENT LINK
+   ====================== */
+
+/* Off-screen until focused — left-offset pattern keeps it in tab order */
+.skip-to-content {
+    position: absolute;
+    left: -999px;
+    z-index: 999;
+    padding: 2px;
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    left: 10px;
+    top: 30px;
+}
+
+/* ======================
    ADA COMPLIANT THEME TOGGLE 
    ====================== */
 
@@ -51,7 +72,6 @@ button#theme-toggle:active {
 button#theme-toggle svg {
     width: 20px;
     height: 20px;
-    display: block;
     margin: auto;
 }
 
@@ -316,6 +336,79 @@ h4 { font-size: 1.25rem; } /* 20px */
 h5 { font-size: 1.125rem; } /* 18px */
 h6 { font-size: 1rem; } /* 16px */
 
+/* Zensical-style code blocks — single source of truth for background on .highlight */
+.post-content .highlight,
+.post-content div.highlight {
+    border: 1px solid #66668A;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 0;
+}
+
+[data-theme="dark"] .post-content .highlight,
+[data-theme="dark"] .post-content div.highlight {
+    background: #1f2329 !important; /* Catppuccin Mocha base */
+}
+
+/* Light-mode code block background — change this value to test different shades.
+   Paired with Catppuccin Latte syntax colors in assets/css/extended/chroma-light.css */
+[data-theme="light"] .post-content .highlight,
+[data-theme="light"] .post-content div.highlight {
+    background: #f7f7f7 !important;
+}
+
+/* Kill PaperMod's duplicate background on the inner <code> so .highlight owns it */
+.md-content pre code,
+.post-content pre code {
+    background: transparent !important;
+    padding: 0.75rem 1rem !important;
+}
+
+/* Material-style icon copy button — always visible, faint until hovered */
+div.highlight > .copy-code,
+pre > .copy-code {
+    display: block;
+}
+
+.copy-code {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--primary);
+    opacity: 0.45;
+    cursor: pointer;
+    transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.copy-code:hover,
+.copy-code:focus-visible {
+    opacity: 1;
+    background: rgba(128, 128, 128, 0.18);
+}
+
+.copy-code.copied {
+    opacity: 1;
+    color: #1a7f37;
+}
+
+[data-theme="dark"] .copy-code.copied {
+    color: #3fb950;
+}
+
+.copy-code svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate(-50%, -50%);
+}
+
 /* Code blocks - Keep monospace for technical content */
 code, pre, .highlight, kbd, samp {
     font-family: var(--font-family-mono);
@@ -394,6 +487,63 @@ a:focus, button:focus, input:focus, textarea:focus {
 button, a, input, select, textarea {
     min-height: 44px;
     min-width: 44px;
+}
+
+/* ======================
+   VISUAL SEPARATION BORDERS
+   ====================== */
+
+/* Footer — top border to separate from main content */
+footer.footer {
+    border-top: 1px solid var(--border);
+}
+
+/* Profile section — bottom border to separate from page content */
+.profile {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--gap);
+    margin-bottom: var(--gap);
+}
+
+/* Social icons — top border to set apart from profile text */
+.social-icons {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+/* Post header — bottom border to separate title/meta from body */
+.post-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Post footer (tags, nav) — top border to separate from body */
+.post-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Post navigation (prev/next) — top border */
+.paginav {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Table of contents — already has a border, just ensure consistency */
+details.toc {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* Breadcrumbs — bottom border */
+.breadcrumbs {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Print styles - Maintain accessibility in print */
