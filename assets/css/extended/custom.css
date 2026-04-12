@@ -331,7 +331,7 @@ h6 { font-size: 1rem; } /* 16px */
    Paired with Catppuccin Latte syntax colors in assets/css/extended/chroma-light.css */
 [data-theme="light"] .post-content .highlight,
 [data-theme="light"] .post-content div.highlight {
-    background: #e3e3e3 !important;
+    background: #f7f7f7 !important;
 }
 
 /* Kill PaperMod's duplicate background on the inner <code> so .highlight owns it */
