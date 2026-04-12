@@ -60,3 +60,33 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 {{- end }}
 
+{{- /* ADA Compliant Back-to-Top Button Enhancement */ -}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const topLink = document.getElementById('top-link');
+    if (!topLink) return;
+
+    function updateTopLinkAccessibility() {
+        const isVisible = getComputedStyle(topLink).visibility === 'visible';
+        topLink.setAttribute('tabindex', isVisible ? '0' : '-1');
+        topLink.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+    }
+
+    topLink.setAttribute('role', 'button');
+    topLink.setAttribute('aria-label', 'Go back to top of page');
+    updateTopLinkAccessibility();
+
+    const observer = new MutationObserver(updateTopLinkAccessibility);
+    observer.observe(topLink, { attributes: true, attributeFilter: ['style', 'class'] });
+
+    topLink.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const topElement = document.getElementById('top') || document.body;
+            topElement.setAttribute('tabindex', '-1');
+            topElement.focus();
+        }
+    });
+});
+</script>
