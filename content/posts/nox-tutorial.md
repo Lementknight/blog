@@ -124,4 +124,4 @@ Next week I plan on explaining how you can use nox in your ci/cd pipeline to aut
 
 If you have any questions or topics you'd like me to cover, feel free to reach out!
 
-Contact me at [calebaguirreleon@gmail.com](mailto:calebaguirreleon+blog.questions@gmail.com?subject=Question%20about%20Concept&body=Hi%20Caleb%2C%0A%0AI%20read%20your%20Nox%20tutorial%20and%20had%20a%20question%3A%0A%0A%5BYour%20question%20here%5D%0A%0AThanks%21)
+Feel free to [reach out via the contact form](/contact/?ref=nox-tutorial).
