@@ -10,13 +10,10 @@ hugo.darwin
 hugo.linux
 
 # Temporary lock file while building
-/.hugo_build.lock
+.hugo_build.lock
 
 # Apple Files
 .DS_Store
-*/.DS_Store
-*/*/.DS_Store
-*/*/*/.DS_Store
 
 # Static Website
 .github/workflows/public/*
