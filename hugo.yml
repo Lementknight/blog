@@ -20,7 +20,7 @@ params:
   # Enable ADA compliant theme toggle
   disableThemeToggle: false
   author: ["Caleb Aguirre-Leon"]
-  ShowCodeCopyButtons: true
+  ShowCodeCopyButtons: false
   
   # Giscus comments configuration
   comments:

@@ -315,6 +315,53 @@ h4 { font-size: 1.25rem; } /* 20px */
 h5 { font-size: 1.125rem; } /* 18px */
 h6 { font-size: 1rem; } /* 16px */
 
+/* Material-style icon copy button — overrides PaperMod's text-based one */
+.copy-code {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--primary);
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.highlight:hover > .copy-code,
+pre:hover > .copy-code,
+.copy-code:focus-visible {
+    opacity: 0.55;
+}
+
+.copy-code:hover,
+.copy-code:focus-visible {
+    opacity: 1;
+    background: rgba(128, 128, 128, 0.18);
+}
+
+.copy-code.copied {
+    opacity: 1;
+    color: #1a7f37;
+}
+
+[data-theme="dark"] .copy-code.copied {
+    color: #3fb950;
+}
+
+.copy-code svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate(-50%, -50%);
+}
+
 /* Code blocks - Keep monospace for technical content */
 code, pre, .highlight, kbd, samp {
     font-family: var(--font-family-mono);
