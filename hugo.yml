@@ -11,12 +11,28 @@ canonifyURLs: false
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
+# Output formats for RSS and other feeds
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+
+# Taxonomies for organizing content
+taxonomies:
+  tag: tags
+  category: categories
+
 markup:
   goldmark:
     renderer:
       unsafe: true
   highlight:
     noClasses: false
+    lineNos: false
 
 params:
   # Enable ADA compliant theme toggle
