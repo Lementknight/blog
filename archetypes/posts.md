@@ -7,4 +7,4 @@ draft: true
 ---
 
 
-{{ partial "giscus.html" }}
+{{ partial "comments.html" }}
