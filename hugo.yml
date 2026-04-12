@@ -49,12 +49,10 @@ params:
   socialIcons: # optional
     - name: "GitHub"
       url: "https://github.com/Lementknight"
-    - name: "unsplash"
-      url: "https://flic.kr/ps/46EKnC"
     - name: "linkedin"
       url: "https://www.linkedin.com/in/caleb-aguirre-leon/"
-    - name: "email"
-      url: "mailto:calebaguirreleon@gmail.com"
+    - name: "unsplash"
+      url: "https://flic.kr/ps/46EKnC"
 
 menu:
   main:
