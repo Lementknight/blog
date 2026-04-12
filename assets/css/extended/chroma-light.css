@@ -1,8 +1,8 @@
 /* Catppuccin Frappe-inspired Light Theme with enhanced contrast */
 
 /* Base and background */
-[data-theme="light"] .chroma { color: #4a4f59 !important; background-color: #eff1f5; }
-[data-theme="light"] .bg { color: #4a4f59 !important; background-color: #eff1f5; }
+[data-theme="light"] .chroma { color: #4a4f59 !important; background-color: #e3e3e3; }
+[data-theme="light"] .bg { color: #4a4f59 !important; background-color: #e3e3e3; }
 
 /* Catch-all for any text that doesn't have a class */
 [data-theme="light"] .chroma { 

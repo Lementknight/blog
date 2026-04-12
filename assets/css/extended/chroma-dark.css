@@ -1,8 +1,8 @@
 /* Catppuccin Mocha Dark Theme */
 
 /* Base and background */
-[data-theme="dark"] .chroma { color: #e6f3ff !important; background-color: #1e1e2e; }
-[data-theme="dark"] .bg { color: #e6f3ff !important; background-color: #1e1e2e; }
+[data-theme="dark"] .chroma { color: #e6f3ff !important; background-color: #1f2329; }
+[data-theme="dark"] .bg { color: #e6f3ff !important; background-color: #1f2329; }
 [data-theme="dark"] .chroma > * { color: #e6f3ff !important; }
 
 /* Error highlighting */
