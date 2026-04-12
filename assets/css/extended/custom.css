@@ -51,7 +51,6 @@ button#theme-toggle:active {
 button#theme-toggle svg {
     width: 20px;
     height: 20px;
-    display: block;
     margin: auto;
 }
 
