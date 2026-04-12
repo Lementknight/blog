@@ -5,8 +5,11 @@ preview:
 	hugo server --disableFastRender --environment production
 
 new_post:
-	@read -p "Post title (e.g. my-new-post): " name; \
-	hugo new content/posts/$$name.md
+	`@printf` "Post title (e.g. my-new-post): "; \
+	read name; \
+	slug=$$(printf "%s" "$$name" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g'); \
+	test -n "$$slug"; \
+	hugo new "content/posts/$$slug.md"
 
 debug:
 	rm -rf public && hugo server --disableFastRender --noHTTPCache
