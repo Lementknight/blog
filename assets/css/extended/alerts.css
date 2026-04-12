@@ -1,0 +1,31 @@
+/* GitHub-style alerts rendered via render-blockquote.html */
+.alert {
+    margin: 1.5em 0;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid var(--alert-border, #888);
+    background-color: var(--alert-bg, rgba(128, 128, 128, 0.08));
+    border-radius: 4px;
+}
+
+.alert .alert-title {
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--alert-border, #888);
+    text-transform: none;
+}
+
+.alert p:last-child {
+    margin-bottom: 0;
+}
+
+.alert-note     { --alert-border: #0969da; --alert-bg: rgba(9, 105, 218, 0.08); }
+.alert-tip      { --alert-border: #1a7f37; --alert-bg: rgba(26, 127, 55, 0.08); }
+.alert-important{ --alert-border: #8250df; --alert-bg: rgba(130, 80, 223, 0.08); }
+.alert-warning  { --alert-border: #9a6700; --alert-bg: rgba(154, 103, 0, 0.10); }
+.alert-caution  { --alert-border: #cf222e; --alert-bg: rgba(207, 34, 46, 0.08); }
+
+[data-theme="dark"] .alert-note     { --alert-border: #58a6ff; --alert-bg: rgba(56, 139, 253, 0.15); }
+[data-theme="dark"] .alert-tip      { --alert-border: #3fb950; --alert-bg: rgba(46, 160, 67, 0.15); }
+[data-theme="dark"] .alert-important{ --alert-border: #a371f7; --alert-bg: rgba(163, 113, 247, 0.15); }
+[data-theme="dark"] .alert-warning  { --alert-border: #d29922; --alert-bg: rgba(187, 128, 9, 0.15); }
+[data-theme="dark"] .alert-caution  { --alert-border: #f85149; --alert-bg: rgba(248, 81, 73, 0.15); }

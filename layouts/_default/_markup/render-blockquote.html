@@ -1,0 +1,12 @@
+{{- if eq .Type "alert" -}}
+  {{- $type := .AlertType -}}
+  {{- $title := .AlertTitle | default (humanize $type) -}}
+  <blockquote class="alert alert-{{ $type }}">
+    <p class="alert-title">{{ $title }}</p>
+    {{ .Text }}
+  </blockquote>
+{{- else -}}
+  <blockquote>
+    {{ .Text }}
+  </blockquote>
+{{- end -}}

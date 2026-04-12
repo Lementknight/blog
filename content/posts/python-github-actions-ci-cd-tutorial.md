@@ -75,9 +75,8 @@ def tests(session: nox.Session) -> None:
     session.run("coverage", "html")
 ```
 
-{{< callouts "tip" "Customize Your Linting" >}}
-I always like to include an `ruff.toml` file to specify exactly which linting rules I want my projects to follow. This keeps my code consistent across all my projects:
-{{< /callouts >}}
+> [!TIP] Customize Your Linting
+> I always like to include an `ruff.toml` file to specify exactly which linting rules I want my projects to follow. This keeps my code consistent across all my projects:
 
 ```toml
 [lint]
@@ -311,24 +310,23 @@ __marimo__/
 .DS_Store
 ``` 
 
-{{< callouts "tip" "Optional: Local Development Setup" >}}
-If you're working with teammates or frequently clone repositories, consider adding a `setup.sh` script to automate virtual environment creation. This isn't required for GitHub Actions (since it creates its own environments), but it's incredibly handy for local development:
-
-```shell
-#!/usr/bin/env bash
-
-python3 -m venv .virtualenv
-
-if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-    source .virtualenv/Scripts/activate
-else
-    source .virtualenv/bin/activate
-fi
-
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-{{< /callouts >}}
+> [!TIP] Optional: Local Development Setup
+> If you're working with teammates or frequently clone repositories, consider adding a `setup.sh` script to automate virtual environment creation. This isn't required for GitHub Actions (since it creates its own environments), but it's incredibly handy for local development:
+>
+> ```shell
+> #!/usr/bin/env bash
+>
+> python3 -m venv .virtualenv
+>
+> if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+>     source .virtualenv/Scripts/activate
+> else
+>     source .virtualenv/bin/activate
+> fi
+>
+> pip install --upgrade pip
+> pip install -r requirements.txt
+> ```
 
 ## Creating Your First GitHub Actions Workflow
 
@@ -408,9 +406,8 @@ git push origin main
 
 Once you push this, head over to your GitHub repository and click on the "Actions" tab. You should see your new workflow listed there! If there are any syntax errors in your YAML, GitHub will let you know right away.
 
-{{< callouts "note" "Workflow Validation" >}}
-If your workflow doesn't appear in the Actions tab, double-check that your YAML indentation is correct. YAML is very sensitive to spaces and tabs. You can also use online YAML validators to check your syntax before committing.
-{{< /callouts >}}
+> [!NOTE] Workflow Validation
+> If your workflow doesn't appear in the Actions tab, double-check that your YAML indentation is correct. YAML is very sensitive to spaces and tabs. You can also use online YAML validators to check your syntax before committing.
 
 ## Setting Up Branch Protection (Important!)
 
@@ -465,9 +462,8 @@ Here's a basic ruleset I've created that works well for most projects:
 
 You can save this JSON content to a file and import it to your repository following GitHub's [ruleset import guide](https://docs.github.com/en/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization#importing-a-ruleset). 
 
-{{< callouts "warning" "Set This Up First" >}}
-I recommend setting up these protection rules before creating your first pull request. This way, you'll immediately see the CI/CD checks in action and ensure your workflow is properly configured.
-{{< /callouts >}}
+> [!WARNING] Set This Up First
+> I recommend setting up these protection rules before creating your first pull request. This way, you'll immediately see the CI/CD checks in action and ensure your workflow is properly configured.
 
 Feel free to adjust these rules based on your project's needs. For more advanced protection options, check out GitHub's guide on [creating rulesets for repositories](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository).
 

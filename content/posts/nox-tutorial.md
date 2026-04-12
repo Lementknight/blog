@@ -57,9 +57,8 @@ nox -s format lint  # Run multiple sessions
 nox -s tests --     # Pass arguments to the session (after --)
 ```
 
-{{< callouts "tip" "Project Structure" >}}
-Place your `noxfile.py` in the root directory of your project, alongside your `requirements.txt` or `pyproject.toml` file. This ensures Nox can easily find your project files and dependencies.
-{{< /callouts >}}
+> [!TIP] Project Structure
+> Place your `noxfile.py` in the root directory of your project, alongside your `requirements.txt` or `pyproject.toml` file. This ensures Nox can easily find your project files and dependencies.
 
 Before creating your `noxfile.py`, install Nox in your development environment:
 
@@ -67,9 +66,8 @@ Before creating your `noxfile.py`, install Nox in your development environment:
 pip install nox black ruff
 ```
 
-{{< callouts "note" "Virtual Environment Recommendation" >}}
-I prefer to put all of my dependencies in a `requirements.txt` file and install them in a virtual environment. This keeps my global Python environment clean and avoids version conflicts between projects.
-{{< /callouts >}}
+> [!NOTE] Virtual Environment Recommendation
+> I prefer to put all of my dependencies in a `requirements.txt` file and install them in a virtual environment. This keeps my global Python environment clean and avoids version conflicts between projects.
 
 If you're using a requirements.txt file for your project dependencies, here's a complete `noxfile.py` example:
 
@@ -116,6 +114,7 @@ def tests(session: nox.Session) -> None:
     session.run("coverage", "html")
 ```
 
+> [!TIP]
 > If you want to read more about nox, check out the [official documentation](https://nox.thea.codes/en/stable/).
 
 And that's it! You now have a fully automated testing and development workflow using Nox. You can easily run your formatting, linting, and testing commands with simple terminal commands. This saves time and ensures your development environment stays consistent and reproducible across different machines.
