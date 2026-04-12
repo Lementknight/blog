@@ -339,6 +339,7 @@ h6 { font-size: 1rem; } /* 16px */
 /* Zensical-style code blocks — single source of truth for background on .highlight */
 .post-content .highlight,
 .post-content div.highlight {
+    border: 1px solid #444;
     border-radius: 0.5rem !important;
     padding: 0.5rem 0;
 }
@@ -486,6 +487,63 @@ a:focus, button:focus, input:focus, textarea:focus {
 button, a, input, select, textarea {
     min-height: 44px;
     min-width: 44px;
+}
+
+/* ======================
+   VISUAL SEPARATION BORDERS
+   ====================== */
+
+/* Footer — top border to separate from main content */
+footer.footer {
+    border-top: 1px solid var(--border);
+}
+
+/* Profile section — bottom border to separate from page content */
+.profile {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--gap);
+    margin-bottom: var(--gap);
+}
+
+/* Social icons — top border to set apart from profile text */
+.social-icons {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+/* Post header — bottom border to separate title/meta from body */
+.post-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Post footer (tags, nav) — top border to separate from body */
+.post-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Post navigation (prev/next) — top border */
+.paginav {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Table of contents — already has a border, just ensure consistency */
+details.toc {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* Breadcrumbs — bottom border */
+.breadcrumbs {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Print styles - Maintain accessibility in print */
