@@ -11,6 +11,11 @@ canonifyURLs: false
 # Suppress raw HTML warning
 ignoreLogs: ['warning-goldmark-raw-html']
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 params:
   # Enable ADA compliant theme toggle
   disableThemeToggle: false
