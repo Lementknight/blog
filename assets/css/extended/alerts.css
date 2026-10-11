@@ -1,8 +1,9 @@
 /* GitHub-style alerts rendered via render-blockquote.html */
-.alert {
+/* .md-content prefix: the theme's `.md-content blockquote` border would otherwise win */
+.md-content .alert {
     margin: 1.5em 0;
     padding: 0.75rem 1rem;
-    border-left: 4px solid var(--alert-border, #888);
+    border-inline-start: 4px solid var(--alert-border, #888);
     background-color: var(--alert-bg, rgba(128, 128, 128, 0.08));
     border-radius: 4px;
 }
