@@ -84,11 +84,11 @@
 [data-theme="dark"] .p { color: #cdd6f4; }
 
 /* Comments */
-[data-theme="dark"] .c { color: #6c7086; font-style: italic; }
-[data-theme="dark"] .ch { color: #6c7086; font-style: italic; }
-[data-theme="dark"] .cm { color: #6c7086; font-style: italic; }
-[data-theme="dark"] .c1 { color: #6c7086; font-style: italic; }
-[data-theme="dark"] .cs { color: #6c7086; font-style: italic; }
+[data-theme="dark"] .c { color: #8a8fa6; font-style: italic; }
+[data-theme="dark"] .ch { color: #8a8fa6; font-style: italic; }
+[data-theme="dark"] .cm { color: #8a8fa6; font-style: italic; }
+[data-theme="dark"] .c1 { color: #8a8fa6; font-style: italic; }
+[data-theme="dark"] .cs { color: #8a8fa6; font-style: italic; }
 [data-theme="dark"] .cp { color: #89dceb; font-style: italic; }
 [data-theme="dark"] .cpf { color: #89dceb; font-style: italic; }
 
