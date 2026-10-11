@@ -4,11 +4,12 @@
   "scripts": {
     "lint:css": "stylelint \"assets/css/extended/**/*.css\"",
     "lint:css:fix": "stylelint \"assets/css/extended/**/*.css\" --fix",
-    "lint": "bun run lint:css && bun run lint:md",
+    "lint": "bun run lint:css && bun run lint:md && bun run lint:tags",
     "lint:md": "markdownlint-cli2",
     "lint:md:fix": "markdownlint-cli2 --fix",
-    "test:a11y": "pa11y-ci",
-    "prepare": "lefthook install || true"
+    "test:a11y": "pa11y-ci && pa11y-ci --config .pa11yci-light.json",
+    "prepare": "lefthook install || true",
+    "lint:tags": "bash scripts/check-tags.sh"
   },
   "devDependencies": {
     "lefthook": "^2.2.1",

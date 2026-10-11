@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox"
+      ]
+    },
+    "actions": [
+      "click element #theme-toggle",
+      "wait for element #theme-toggle to be visible"
+    ]
+  },
+  "urls": [
+    "http://localhost:8080/",
+    "http://localhost:8080/posts/",
+    "http://localhost:8080/posts/nox-tutorial/",
+    "http://localhost:8080/posts/python-github-actions-ci-cd-tutorial/",
+    "http://localhost:8080/aboutme/",
+    "http://localhost:8080/archive/",
+    "http://localhost:8080/contact/",
+    "http://localhost:8080/tags/"
+  ]
+}
