@@ -21,6 +21,9 @@ outputs:
     - HTML
     - RSS
 
+# Generate /robots.txt (theme template: allows crawling in production)
+enableRobotsTXT: true
+
 # Taxonomies for organizing content
 taxonomies:
   tag: tags
@@ -39,6 +42,14 @@ params:
   disableThemeToggle: false
   # author: ["Caleb Aguirre-Leon"]
   ShowCodeCopyButtons: false
+  # Post page extras
+  ShowToc: true
+  TocOpen: false
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  # Default social preview image (Open Graph / Twitter); posts can override with cover.image
+  images: ["images/og-default.jpg"]
   
   # Renders layouts/partials/comments.html (Giscus settings live in that file)
   comments: true
@@ -82,3 +93,7 @@ menu:
       name: Contact
       url: /contact/
       weight: 4
+    - identifier: Search
+      name: Search
+      url: /search/
+      weight: 5
