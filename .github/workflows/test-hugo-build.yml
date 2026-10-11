@@ -41,6 +41,7 @@ on:
   push:
     branches:
       - test/*
+      - ci/*
       - feature/*
       - develop
     paths:
