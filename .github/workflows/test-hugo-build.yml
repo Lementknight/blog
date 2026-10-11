@@ -23,6 +23,9 @@ on:
       - 'go.sum'
       - 'package.json'
       - 'package-lock.json'
+      - 'bun.lock'
+      - '.stylelintrc.json'
+      - '.markdownlint-cli2.jsonc'
       - '.github/workflows/test-hugo-build.yml'
       - '.github/workflows/firebase-hosting-pull-request.yml'
   push:
@@ -104,8 +107,8 @@ jobs:
         run: |
           [[ -f bun.lock || -f bun.lockb ]] && bun install --frozen-lockfile || true
 
-      - name: Lint CSS
-        run: bun run lint:css
+      - name: Lint CSS and Markdown
+        run: bun run lint
       
       - name: Configure Git
         run: |

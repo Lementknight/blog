@@ -15,4 +15,4 @@ debug:
 	rm -rf public && hugo server --disableFastRender --noHTTPCache
 
 lint:
-	bun run lint:css
+	bun run lint
