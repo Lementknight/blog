@@ -8,7 +8,7 @@
   "headline": {{ .Title | jsonify }},
   "alternativeHeadline": {{ (.Params.subtitle | default .Summary) | jsonify }},
   "description": {{ (.Description | default .Summary) | jsonify }},
-  "inLanguage": {{ .Site.Language.Lang | default .Site.Language.LanguageCode | default "en-us" | jsonify }},
+  "inLanguage": {{ .Site.Language.Lang | default .Site.Language.Locale | default "en-us" | jsonify }},
   "isFamilyFriendly": "true",
   "mainEntityOfPage": {
     "@type": "WebPage",
