@@ -1,0 +1,19 @@
+# Link checker settings (https://lychee.cli.rs)
+# Root-relative links (/posts/...) resolve against the live site
+base_url = "https://calebaguirreleon.com"
+max_concurrency = 8
+max_retries = 2
+timeout = 20
+# Treat rate limiting as OK; some sites block bots with 403/429
+accept = ["200..=299", "403", "429"]
+exclude = [
+  # Local dev server and templated URLs
+  "^http://localhost",
+  "^https://username\\.github\\.io",
+  # Placeholder URLs in the tutorial and POST-only form endpoints
+  "travis-ci\\.com/USERNAME",
+  "formspree\\.io",
+  # LinkedIn blocks automated requests
+  "linkedin\\.com",
+]
+exclude_path = ["node_modules", "themes", "public"]

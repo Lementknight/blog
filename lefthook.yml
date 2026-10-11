@@ -1,0 +1,10 @@
+# Git hooks (installed by `bun install` via the prepare script)
+pre-commit:
+  parallel: true
+  commands:
+    css:
+      glob: "assets/css/extended/*.css"
+      run: bun x stylelint {staged_files}
+    markdown:
+      glob: "{content/**/*.md,SECURITY.md}"
+      run: bun x markdownlint-cli2 {staged_files}

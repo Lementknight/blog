@@ -1,21 +1,98 @@
-/* ADA/Section 508 Compliant Typography */
+/* Site styles layered on PaperMod. Sections: variables, base typography,
+   accessibility, header, theme toggle, back-to-top, code blocks, borders,
+   profile. */
 
-/* Import accessible sans-serif fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Section 508 Compliant Font Stack - Sans-serif required */
 :root {
     --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-    --font-size-base: 16px; /* Minimum readable size for accessibility */
-    --line-height-body: 1.7; /* Enhanced readability */
+    --font-size-base: 16px;
+    --line-height-body: 1.7;
+    --focus-color: #06c;
+}
+
+@media (max-width: 768px) {
+    :root { --font-size-base: 18px; }
 }
 
 /* ======================
-   SKIP TO MAIN CONTENT LINK
+   BASE TYPOGRAPHY
    ====================== */
 
-/* Off-screen until focused — left-offset pattern keeps it in tab order */
+*, *::before, *::after {
+    font-family: inherit;
+}
+
+body, .main, .post-content, .page-content {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p, ul, ol {
+    margin-bottom: 1.5rem;
+    line-height: var(--line-height-body);
+}
+li { margin-bottom: 0.5rem; }
+
+a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* Navigation-style links stay plain; only inline text links are underlined */
+.post-tags a,
+.terms-tags a,
+.archive-year-header a,
+.archive-month-header a,
+.social-icons a {
+    text-decoration: none;
+}
+
+code, pre, .highlight, kbd, samp {
+    font-family: var(--font-family-mono);
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.nav, .menu, .breadcrumbs {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+}
+
+.post-meta, .post-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+}
+
+/* ======================
+   ACCESSIBILITY
+   ====================== */
+
+/* Off-screen until focused; the left offset keeps it in the tab order */
 .skip-to-content {
     position: absolute;
     left: -999px;
@@ -32,277 +109,232 @@
     top: 30px;
 }
 
+/* Minimum 44px touch targets */
+button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Keyboard focus only, so mouse clicks don't leave an outline behind */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+@media (prefers-contrast: more) {
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    #theme-toggle:focus-visible,
+    .top-link:focus-visible {
+        outline: 3px solid currentcolor !important;
+        outline-offset: 2px !important;
+    }
+
+    #menu a:hover {
+        background-color: currentcolor;
+        color: var(--theme);
+    }
+
+    .top-link {
+        border: 2px solid currentcolor;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo a,
+    #menu a,
+    #theme-toggle,
+    .top-link {
+        transition: none;
+    }
+}
+
 /* ======================
-   ADA COMPLIANT THEME TOGGLE 
+   HEADER
    ====================== */
 
-/* Fix theme toggle accessibility issues */
+/* One centre line for brand, toggle and menu */
+.header {
+    border-bottom: 1px solid var(--border);
+}
+
+.header-nav {
+    align-items: center;
+    line-height: 1.5; /* the theme's 60px line-height pushed the menu off-centre */
+    min-height: var(--header-height);
+    column-gap: var(--gap);
+}
+
+.logo a {
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+    line-height: 32px;
+}
+
+.logo a:hover { opacity: 0.8; }
+.logo a:active { opacity: 0.6; }
+
+.logo a:focus-visible {
+    outline: 2px solid var(--focus-color) !important;
+    outline-offset: 3px !important;
+    border-radius: 4px;
+}
+
+/* Padding keeps focus outlines from being clipped by the overflow */
+#menu {
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 4px 0 !important;
+    margin: 0;
+    column-gap: 8px;
+}
+
+#menu li,
+#menu li + li {
+    display: flex;
+    margin: 0;
+}
+
+#menu a {
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: block;
+    position: relative;
+    line-height: 24px;
+}
+
+#menu a:hover { background-color: rgb(128 128 128 / 10%); }
+#menu a:active { background-color: rgb(128 128 128 / 20%); }
+
+#menu a:focus-visible {
+    outline: 2px solid var(--focus-color) !important;
+    outline-offset: 1px !important;
+    background-color: rgb(0 102 204 / 10%);
+}
+
+/* Current page: one underline drawn as a pseudo-element, so it adds no height
+   and the text stays level with its neighbours */
+#menu a:has(.active)::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    height: 2px;
+    background: currentcolor;
+}
+
+#menu .active {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Small screens: brand row on top, menu spans the full width */
+@media (max-width: 768px) {
+    .header-nav { row-gap: 0; }
+    .logo { min-height: 56px; }
+
+    #menu {
+        flex: 1 0 100%;
+        justify-content: space-between;
+        column-gap: 0;
+        margin-bottom: 8px;
+    }
+
+    #menu a {
+        padding: 10px 8px;
+        min-height: 44px;
+        box-sizing: border-box;
+    }
+
+    #menu a:has(.active)::after {
+        left: 8px;
+        right: 8px;
+        bottom: 6px;
+    }
+}
+
+/* ======================
+   THEME TOGGLE
+   ====================== */
+
 button#theme-toggle {
-    /* ADA Requirement: Minimum 44x44px touch target */
     min-width: 44px !important;
     min-height: 44px !important;
-    
-    /* Ensure proper padding for touch targets */
     padding: 10px !important;
-    
-    /* Better visual feedback */
     border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease;
 }
 
-/* CRITICAL: Restore focus indicators for keyboard navigation */
-button#theme-toggle:focus {
-    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
+button#theme-toggle:hover { background-color: rgb(128 128 128 / 10%); }
+button#theme-toggle:active { background-color: rgb(128 128 128 / 20%); }
+
+/* The theme sets outline: 0, so this needs !important */
+button#theme-toggle:focus-visible {
+    outline: 2px solid var(--focus-color) !important;
     outline-offset: 2px !important;
-    background-color: rgba(0, 102, 204, 0.1) !important;
+    background-color: rgb(0 102 204 / 10%) !important;
 }
 
-/* Enhanced hover states for better usability */
-button#theme-toggle:hover {
-    background-color: rgba(128, 128, 128, 0.1);
-    transform: scale(1.05);
-}
-
-/* Active state feedback */
-button#theme-toggle:active {
-    transform: scale(0.95);
-}
-
-/* Ensure icons are properly sized within the accessible button */
 button#theme-toggle svg {
     width: 20px;
     height: 20px;
     margin: auto;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    button#theme-toggle:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
-    }
-}
-
 /* ======================
-   ADA COMPLIANT NAVBAR STYLING 
+   BACK TO TOP
    ====================== */
 
-/* Logo/Brand link styling - consistent with theme */
-.logo a {
-    transition: opacity 0.2s ease, transform 0.1s ease;
-    text-decoration: none;
-}
-
-.logo a:hover {
-    opacity: 0.8;
-    transform: translateY(-1px);
-}
-
-.logo a:focus {
-    outline: 2px solid #0066cc !important;
-    outline-offset: 3px !important;
-    border-radius: 4px;
-}
-
-.logo a:active {
-    transform: translateY(0px);
-}
-
-/* Menu navigation links - matching logo styling */
-#menu a {
-    transition: all 0.2s ease;
-    text-decoration: none;
-    padding: 10px 12px; /* Increased padding for complete outline coverage */
-    border-radius: 6px; /* Slightly larger border radius */
-    display: inline-block;
-    position: relative;
-    /* Ensure the element has enough space for the outline */
-    margin: 2px; /* Small margin to prevent outline clipping */
-    line-height: 1.4; /* Better line height for consistent button size */
-}
-
-/* Menu link hover states - same as logo */
-#menu a:hover {
-    opacity: 0.8;
-    transform: translateY(-1px);
-    background-color: rgba(128, 128, 128, 0.1);
-}
-
-/* Menu link focus states - ADA compliant with complete outline */
-#menu a:focus {
-    outline: 2px solid #0066cc !important;
-    outline-offset: 1px !important; /* Reduced offset for better containment */
-    background-color: rgba(0, 102, 204, 0.1);
-    /* Ensure outline doesn't get clipped */
-    box-shadow: 0 0 0 1px rgba(0, 102, 204, 0.2); /* Additional visual indicator */
-}
-
-/* Menu link active states */
-#menu a:active {
-    transform: translateY(0px);
-}
-
-/* Enhanced active state for current page */
-#menu .active {
-    font-weight: 500;
-    border-bottom: 2px solid currentColor;
-    background-color: rgba(0, 102, 204, 0.05);
-    /* Ensure active state works with the new padding */
-    padding-bottom: 8px; /* Adjust for border-bottom */
-}
-
-/* Ensure minimum touch target size for mobile */
-@media (max-width: 768px) {
-    #menu a {
-        padding: 12px 16px; /* Increased horizontal padding on mobile */
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        margin: 3px; /* Slightly more margin on mobile */
-    }
-}
-
-/* Menu container adjustments to prevent outline clipping */
-#menu {
-    list-style: none;
-    word-break: keep-all;
-    overflow-x: auto;
-    white-space: nowrap;
-    /* Add padding to container to prevent focus outline clipping */
-    padding: 4px 0 !important;
-    /* Ensure scrolling doesn't cut off focus indicators */
-    scroll-padding: 4px;
-}
-
-/* Menu list items - ensure proper spacing */
-#menu li {
-    display: inline-block;
-    /* Add small margin to prevent outline overlap */
-    margin: 0 2px;
-}
-
-/* Override theme's margin between menu items */
-#menu li + li {
-    margin-inline-start: calc(var(--gap) - 4px); /* Adjust for our new margins */
-}
-
-/* High contrast mode enhancements */
-@media (prefers-contrast: high) {
-    .logo a:focus,
-    #menu a:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
-    }
-    
-    #menu a:hover {
-        background-color: currentColor;
-        color: var(--theme);
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .logo a,
-    #menu a {
-        transition: none;
-    }
-    
-    .logo a:hover,
-    #menu a:hover {
-        transform: none;
-    }
-}
-
-/* ======================
-   ADA COMPLIANT "BACK TO TOP" BUTTON 
-   ====================== */
-
-/* Fix the top-link accessibility issues */
 .top-link {
-    /* Ensure it's always focusable when visible */
     visibility: hidden;
     position: fixed;
     bottom: 60px;
     right: 30px;
     z-index: 99;
-    background: var(--tertiary);
-    width: 48px !important; /* Increase to meet 44px minimum */
-    height: 48px !important; /* Increase to meet 44px minimum */
-    padding: 12px;
-    border-radius: 50%;
-    transition: visibility 0.5s, opacity 0.8s linear, transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* Ensure it can receive focus */
     display: flex !important;
     align-items: center;
     justify-content: center;
-    
-    /* Add subtle shadow for better visibility */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 48px !important;
+    height: 48px !important;
+    padding: 12px;
+    border-radius: 50%;
+    background: var(--tertiary);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transition: visibility 0.5s, opacity 0.8s linear, box-shadow 0.2s ease;
 }
 
-/* When visible, ensure it's focusable and in tab order */
+/* Shown by the theme's scroll script via an inline style */
 .top-link[style*="visibility: visible"],
 .top-link.show {
     visibility: visible !important;
-    /* JavaScript will handle tabindex management */
 }
 
-/* CRITICAL: Restore focus indicators */
-.top-link:focus {
-    outline: 2px solid #0066cc !important; /* Override theme's outline: 0 */
+.top-link:hover {
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+}
+
+.top-link:focus-visible {
+    outline: 2px solid var(--focus-color) !important;
     outline-offset: 3px !important;
     background-color: var(--primary) !important;
     color: var(--theme) !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 4px 12px rgb(0 102 204 / 30%);
 }
 
-/* Enhanced hover state */
-.top-link:hover {
-    color: var(--primary);
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Active state */
-.top-link:active {
-    transform: scale(0.95);
-}
-
-/* Ensure the SVG icon is properly sized and accessible */
 .top-link svg {
     width: 20px;
     height: 20px;
     display: block;
-    filter: drop-shadow(0px 0px 0px var(--theme));
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .top-link:focus {
-        outline: 3px solid currentColor !important;
-        outline-offset: 2px !important;
-    }
-    
-    .top-link {
-        border: 2px solid currentColor;
-    }
-}
-
-/* Reduced motion support for top-link */
-@media (prefers-reduced-motion: reduce) {
-    .top-link {
-        transition: visibility 0.5s, opacity 0.8s linear; /* Keep only essential transitions */
-    }
-    
-    .top-link:hover,
-    .top-link:focus {
-        transform: none;
-    }
-}
-
-/* Mobile adjustments */
 @media (max-width: 768px) {
     .top-link {
         bottom: 80px;
@@ -312,29 +344,9 @@ button#theme-toggle svg {
     }
 }
 
-/* Body text - Sans-serif as required by Section 508 */
-body, .main {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-}
-
-/* Headers - Sans-serif with good contrast hierarchy */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-body);
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 0.5em;
-}
-
-/* Specific header sizes for accessibility */
-h1 { font-size: 2.25rem; } /* 36px */
-h2 { font-size: 1.875rem; } /* 30px */
-h3 { font-size: 1.5rem; } /* 24px */
-h4 { font-size: 1.25rem; } /* 20px */
-h5 { font-size: 1.125rem; } /* 18px */
-h6 { font-size: 1rem; } /* 16px */
+/* ======================
+   CODE BLOCKS
+   ====================== */
 
 /* Zensical-style code blocks — single source of truth for background on .highlight */
 .post-content .highlight,
@@ -371,13 +383,13 @@ pre > .copy-code {
 
 .copy-code {
     position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-    width: 1.75rem;
-    height: 1.75rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px; /* matches the sitewide minimum touch target */
+    height: 44px;
     padding: 0;
     border: none;
-    border-radius: 0.25rem;
+    border-radius: 6px;
     background: transparent;
     color: var(--primary);
     opacity: 0.45;
@@ -385,10 +397,17 @@ pre > .copy-code {
     transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.copy-code:hover,
+/* Hover only on devices that have it, so touch screens don't keep the grey box after a tap */
+@media (hover: hover) {
+    .copy-code:hover {
+        opacity: 1;
+        background: rgb(128 128 128 / 18%);
+    }
+}
+
 .copy-code:focus-visible {
     opacity: 1;
-    background: rgba(128, 128, 128, 0.18);
+    background: rgb(128 128 128 / 18%);
 }
 
 .copy-code.copied {
@@ -409,148 +428,89 @@ pre > .copy-code {
     transform: translate(-50%, -50%);
 }
 
-/* Code blocks - Keep monospace for technical content */
-code, pre, .highlight, kbd, samp {
-    font-family: var(--font-family-mono);
-    font-size: 0.875rem; /* 14px - not too small */
-    font-weight: 400;
-}
-
-/* Navigation and UI - Sans-serif */
-.nav, .menu, .breadcrumbs {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 500;
-}
-
-/* Blog post content - Optimized for reading */
-.post-content, .page-content, .post-single .post-content {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-}
-
-/* Paragraphs - Enhanced spacing for readability */
-p {
-    margin-bottom: 1.5rem;
-    line-height: var(--line-height-body);
-}
-
-/* Lists - Accessible formatting */
-ul, ol {
-    line-height: var(--line-height-body);
-    margin-bottom: 1.5rem;
-}
-
-li {
-    margin-bottom: 0.5rem;
-}
-
-/* Links - Ensure they're distinguishable */
-a {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-}
-
-/* Focus indicators for keyboard navigation */
-a:focus, button:focus, input:focus, textarea:focus {
-    outline: 2px solid #0066cc;
-    outline-offset: 2px;
-}
-
-/* Ensure text can be resized to 200% without loss of functionality */
-@media (max-width: 768px) {
-    :root {
-        --font-size-base: 18px; /* Slightly larger on mobile */
-    }
-}
-
-/* Override any theme-specific font families for compliance */
-*, *::before, *::after {
-    font-family: inherit;
-}
-
-/* Specific overrides for PaperMod theme elements */
-.post-title, .page-title {
-    font-family: var(--font-family-body) !important;
-}
-
-.post-meta, .post-description {
-    font-family: var(--font-family-body) !important;
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-/* Accessibility: Ensure minimum touch target size */
-button, a, input, select, textarea {
-    min-height: 44px;
-    min-width: 44px;
-}
-
 /* ======================
-   VISUAL SEPARATION BORDERS
+   SECTION BORDERS
    ====================== */
 
-/* Footer — top border to separate from main content */
-footer.footer {
-    border-top: 1px solid var(--border);
-}
+footer.footer { border-top: 1px solid var(--border); }
 
-/* Profile section — bottom border to separate from page content */
 .profile {
     border-bottom: 1px solid var(--border);
     padding-bottom: var(--gap);
     margin-bottom: var(--gap);
 }
 
-/* Social icons — top border to set apart from profile text */
 .social-icons {
     border-top: 1px solid var(--border);
     padding-top: 1rem;
     margin-top: 1rem;
 }
 
-/* Post header — bottom border to separate title/meta from body */
 .post-header {
     border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
 }
 
-/* Post footer (tags, nav) — top border to separate from body */
-.post-footer {
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-    margin-top: 1.5rem;
-}
-
-/* Post navigation (prev/next) — top border */
+.post-footer,
 .paginav {
     border-top: 1px solid var(--border);
     padding-top: 1rem;
     margin-top: 1.5rem;
 }
 
-/* Table of contents — already has a border, just ensure consistency */
-details.toc {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-}
-
-/* Breadcrumbs — bottom border */
 .breadcrumbs {
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
 }
 
-/* Print styles - Maintain accessibility in print */
-@media print {
-    body {
-        font-family: var(--font-family-body);
-        font-size: 12pt;
-        line-height: 1.6;
-    }
+/* Tag chips: centred label, no underline, even gaps when they wrap */
+.post-tags {
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.post-tags li { margin: 0; }
+
+.post-tags a {
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    line-height: 1.5;
+    color: var(--content); /* the theme's --secondary is 4.25:1 on the dark chip */
+}
+
+/* A post footer with no tags would otherwise leave a stray divider line */
+.post-footer:not(:has(li)) {
+    display: none;
+}
+
+/* Space between the post (tags/share) and the Giscus comments */
+.comments-section {
+    margin-top: 3rem;
+}
+
+details.toc {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* ======================
+   PROFILE IMAGE
+   ====================== */
+
+/* min-height (300px) already overrides the old max-height (200px), so only the
+   effective constraints are kept */
+.profile img,
+.profile .profile_inner img,
+img[src*="profile"],
+img[src*="profile_hu"],
+img[alt*="Caleb"] {
+    object-fit: cover !important;
+    object-position: 90% center !important;
+    max-width: 300px !important;
+    min-width: 200px !important;
+    min-height: 300px !important;
 }

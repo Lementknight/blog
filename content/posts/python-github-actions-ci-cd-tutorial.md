@@ -16,7 +16,6 @@ To make this easier to follow along, I've created a starter repository template 
 
 Before we get started, let's define what CI/CD stands for. CI/CD stands continuous integration / continuous deployment and is the process of deploying new features from your local machine to the production environment. CI/CD pipelines are very import for code bases because they act as the quality control and manufactures of new code for a codebase. CI/CD jobs are a very important principal of DevOps and Backend Engineering
 
-
 ## Setting Up Your Project Foundation
 
 Before we dive into GitHub Actions, let's make sure your project has the essential files. If you followed my previous Nox tutorial, you might already have some of these!
@@ -97,6 +96,7 @@ select = [
 ```
 
 One thing I learned the hard way early in my Python journey was the importance of a comprehensive `.gitignore` file. Trust me, you don't want to accidentally commit your virtual environment or sensitive data! Here's the template I use for all my Python projects:
+
 ```sh
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -308,7 +308,7 @@ __marimo__/
 
 # Mac OS Metadata
 .DS_Store
-``` 
+```
 
 > [!TIP] Optional: Local Development Setup
 > If you're working with teammates or frequently clone repositories, consider adding a `setup.sh` script to automate virtual environment creation. This isn't required for GitHub Actions (since it creates its own environments), but it's incredibly handy for local development:
@@ -333,6 +333,7 @@ __marimo__/
 Now comes the exciting part! With all our project files in place, it's time to set up the CI/CD pipeline that will run automatically whenever you push code.
 
 First, let's create the directory structure that GitHub Actions expects:
+
 ```shell
 mkdir -p .github/workflows
 ```
@@ -340,6 +341,7 @@ mkdir -p .github/workflows
 The `.github` directory is like the control center for your repository - it's where GitHub looks for all configuration files. The `workflows` subdirectory is specifically where we'll define our automated processes.
 
 Now for the main event! Let's create our workflow file. I like to name mine `python-package.yml` to keep things clear and descriptive:
+
 ```yml
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information on workflows see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
@@ -458,9 +460,9 @@ Here's a basic ruleset I've created that works well for most projects:
   "bypass_actors": []
 }
 
-``` 
+```
 
-You can save this JSON content to a file and import it to your repository following GitHub's [ruleset import guide](https://docs.github.com/en/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization#importing-a-ruleset). 
+You can save this JSON content to a file and import it to your repository following GitHub's [ruleset import guide](https://docs.github.com/en/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization#importing-a-ruleset).
 
 > [!WARNING] Set This Up First
 > I recommend setting up these protection rules before creating your first pull request. This way, you'll immediately see the CI/CD checks in action and ensure your workflow is properly configured.

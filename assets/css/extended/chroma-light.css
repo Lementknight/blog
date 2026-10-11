@@ -14,7 +14,7 @@
 }
 
 /* Error highlighting */
-[data-theme="light"] .err { color: #e78284; background-color: #f4e5e5; font-weight: bold; }
+[data-theme="light"] .err { color: #d72f32; background-color: #f4e5e5; font-weight: bold; }
 
 /* Line styling */
 [data-theme="light"] .lnlinks { outline: none; text-decoration: none; color: inherit; }
@@ -26,67 +26,67 @@
 [data-theme="light"] .line { display: flex; }
 
 /* Keywords */
-[data-theme="light"] .k { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kc { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kd { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kn { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kp { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kr { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .kt { color: #e9a12b; font-weight: bold; }
+[data-theme="light"] .k { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kc { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kd { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kn { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kp { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kr { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .kt { color: #9b6710; font-weight: bold; }
 
 /* Names and identifiers */
 [data-theme="light"] .n { color: #4a4f59 !important; }
 [data-theme="light"] .na { color: #2563eb; }
 [data-theme="light"] .nb { color: #2563eb; }
 [data-theme="light"] .bp { color: #4a4f59 !important; }
-[data-theme="light"] .nc { color: #e9a12b; font-weight: bold; }
-[data-theme="light"] .no { color: #ef8354; }
+[data-theme="light"] .nc { color: #9b6710; font-weight: bold; }
+[data-theme="light"] .no { color: #c54912; }
 [data-theme="light"] .nd { color: #2563eb; font-weight: bold; }
-[data-theme="light"] .ni { color: #ea76cb; }
-[data-theme="light"] .ne { color: #e78284; font-weight: bold; }
+[data-theme="light"] .ni { color: #ce209f; }
+[data-theme="light"] .ne { color: #d72f32; font-weight: bold; }
 [data-theme="light"] .nf { color: #2563eb; font-weight: bold; }
 [data-theme="light"] .fm { color: #2563eb; }
 [data-theme="light"] .nl { color: #4a4f59 !important; font-weight: bold; }
 [data-theme="light"] .nn { color: #4a4f59 !important; }
 [data-theme="light"] .nx { color: #4a4f59 !important; }
 [data-theme="light"] .py { color: #2563eb; }
-[data-theme="light"] .nt { color: #8b5cf6; font-weight: bold; }
-[data-theme="light"] .nv { color: #ea76cb; }
-[data-theme="light"] .vc { color: #ea76cb; }
-[data-theme="light"] .vg { color: #ea76cb; }
-[data-theme="light"] .vi { color: #ea76cb; }
-[data-theme="light"] .vm { color: #ea76cb; }
+[data-theme="light"] .nt { color: #814ef5; font-weight: bold; }
+[data-theme="light"] .nv { color: #ce209f; }
+[data-theme="light"] .vc { color: #ce209f; }
+[data-theme="light"] .vg { color: #ce209f; }
+[data-theme="light"] .vi { color: #ce209f; }
+[data-theme="light"] .vm { color: #ce209f; }
 
 /* Literals and strings */
-[data-theme="light"] .l { color: #ef8354; }
-[data-theme="light"] .ld { color: #10b981; }
-[data-theme="light"] .s { color: #10b981; }
-[data-theme="light"] .sa { color: #10b981; }
-[data-theme="light"] .sb { color: #10b981; }
-[data-theme="light"] .sc { color: #10b981; }
-[data-theme="light"] .dl { color: #10b981; }
-[data-theme="light"] .sd { color: #10b981; font-style: italic; }
-[data-theme="light"] .s2 { color: #10b981; }
-[data-theme="light"] .se { color: #ef8354; font-weight: bold; }
-[data-theme="light"] .sh { color: #10b981; }
-[data-theme="light"] .si { color: #ef8354; }
-[data-theme="light"] .sx { color: #10b981; }
-[data-theme="light"] .sr { color: #06b6d4; }
-[data-theme="light"] .s1 { color: #10b981; }
-[data-theme="light"] .ss { color: #ea76cb; }
+[data-theme="light"] .l { color: #c54912; }
+[data-theme="light"] .ld { color: #0b815a; }
+[data-theme="light"] .s { color: #0b815a; }
+[data-theme="light"] .sa { color: #0b815a; }
+[data-theme="light"] .sb { color: #0b815a; }
+[data-theme="light"] .sc { color: #0b815a; }
+[data-theme="light"] .dl { color: #0b815a; }
+[data-theme="light"] .sd { color: #0b815a; font-style: italic; }
+[data-theme="light"] .s2 { color: #0b815a; }
+[data-theme="light"] .se { color: #c54912; font-weight: bold; }
+[data-theme="light"] .sh { color: #0b815a; }
+[data-theme="light"] .si { color: #c54912; }
+[data-theme="light"] .sx { color: #0b815a; }
+[data-theme="light"] .sr { color: #047d91; }
+[data-theme="light"] .s1 { color: #0b815a; }
+[data-theme="light"] .ss { color: #ce209f; }
 
 /* Numbers */
-[data-theme="light"] .m { color: #ef8354; }
-[data-theme="light"] .mb { color: #ef8354; }
-[data-theme="light"] .mf { color: #ef8354; }
-[data-theme="light"] .mh { color: #ef8354; }
-[data-theme="light"] .mi { color: #ef8354; }
-[data-theme="light"] .il { color: #ef8354; }
-[data-theme="light"] .mo { color: #ef8354; }
+[data-theme="light"] .m { color: #c54912; }
+[data-theme="light"] .mb { color: #c54912; }
+[data-theme="light"] .mf { color: #c54912; }
+[data-theme="light"] .mh { color: #c54912; }
+[data-theme="light"] .mi { color: #c54912; }
+[data-theme="light"] .il { color: #c54912; }
+[data-theme="light"] .mo { color: #c54912; }
 
 /* Operators */
-[data-theme="light"] .o { color: #06b6d4; font-weight: bold; }
-[data-theme="light"] .ow { color: #06b6d4; font-weight: bold; }
+[data-theme="light"] .o { color: #047d91; font-weight: bold; }
+[data-theme="light"] .ow { color: #047d91; font-weight: bold; }
 
 /* Punctuation */
 [data-theme="light"] .p { color: #4a4f59; }
@@ -97,7 +97,7 @@
 [data-theme="light"] .cm { color: #4a4f59; font-style: italic; }
 [data-theme="light"] .c1 { color: #4a4f59; font-style: italic; }
 [data-theme="light"] .cs { color: #4a4f59; font-style: italic; }
-[data-theme="light"] .cp { color: #8b5cf6; font-style: italic; }
+[data-theme="light"] .cp { color: #814ef5; font-style: italic; }
 .cpf { color: #8b5cf6; font-style: italic; }
 
 /* Generic */

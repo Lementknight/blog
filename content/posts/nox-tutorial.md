@@ -9,14 +9,18 @@ draft: false
 In my pursuit to improve as a software engineer, I discovered tools like [Black](https://black.readthedocs.io/en/stable/) and [Ruff](https://docs.astral.sh/ruff/) that helped me write pythonic code following [PEP 8](https://peps.python.org/pep-0008/) best practices. While linter and formatter commands are easy to remember, testing commands can become painfully cumbersome.
 
 For example, in one of my current projects, testing requires this command:
+
 ```bash
 coverage run -m unittest discover -s "tests" -p "*_test.py"
 ```
+
 Followed by:
+
 ```bash
 coverage report --fail-under=100 #generates coverage report
 coverage html #creates HTML for coverage report
 ```
+
 Just typing those commands makes my fingers hurt! And that's before dealing with virtual environment setup and dependencies. This is where Nox comes in.
 
 Nox lets you automate your formatting, linting, and testing workflows by defining them in a `noxfile.py`. This file specifies different sessions to run, along with their dependencies and commands. With Nox, you get a consistent and reproducible environment that makes dependency management and test execution simpler.
@@ -35,7 +39,6 @@ def format(session: nox.Session) -> None:
 ```
 
 You import the `nox` module and use the `@nox.session` decorator to define a function. Notice that you install the black package within the session. This is because each Nox session runs in an isolated environment where packages and commands are contained within that session.
-
 
 Run it in the terminal like this:
 

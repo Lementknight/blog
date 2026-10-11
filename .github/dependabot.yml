@@ -23,3 +23,35 @@ updates:
         update-types:
           - "minor"
           - "patch"
+
+  # JavaScript tooling (Stylelint, markdownlint, pa11y-ci, lefthook)
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      js-tooling:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # PaperMod theme (git submodule)
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "theme"
+    commit-message:
+      prefix: "chore"
+      include: "scope"

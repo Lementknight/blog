@@ -81,9 +81,26 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.setAttribute('aria-label', 'Copy code to clipboard');
         btn.innerHTML = COPY_SVG;
 
+        // navigator.clipboard only exists on HTTPS/localhost, so fall back to execCommand
+        async function copyText(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.cssText = 'position:fixed;top:0;left:-9999px;';
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (!ok) throw new Error('copy failed');
+        }
+
         btn.addEventListener('click', async function() {
             try {
-                await navigator.clipboard.writeText(code.textContent);
+                await copyText(code.textContent);
                 btn.innerHTML = CHECK_SVG;
                 btn.classList.add('copied');
                 btn.setAttribute('aria-label', 'Copied');
