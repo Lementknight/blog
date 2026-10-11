@@ -46,8 +46,8 @@ App_Name.app/
 
 `Info.plist` is a property list file that contains metadata about the application, such as its name, version, and executable path.
 
-
 ## Step 3: Create the Directory Structure
+
 Open your terminal and navigate to the `Applications` directory. Then run the following commands to create the necessary directories:
 
 ```bash
@@ -62,6 +62,7 @@ cp <path_to_your_shell_script> App_Name.app/Contents/MacOS/ # Copies the shell s
 > You want to place the app in the `Applications` directory so that it can be easily accessed and launched like any other application on your Mac.
 
 ## Step 4: Edit the Info.plist File
+
 Now you need to edit the `Info.plist` file to provide the necessary metadata for your application. Open the `Info.plist` file in a text editor and add the following content:
 
 ```xml
@@ -82,14 +83,15 @@ Now you need to edit the `Info.plist` file to provide the necessary metadata for
 </dict>
 </plist>
 ```
-> [!NOTE]
-> Replace `LSArchitecturePriority` is set to `arm64` since my the mod for Balatro needs to run on the Apple Silicon architecture (not with Rosetta 2). You can read more about the `Info.plist` file [here](https://developer.apple.com/documentation/bundleresources/information-property-list).
 
+> [!NOTE]
+> Replace `LSArchitecturePriority` is set to `arm64` since my the mod for Balatro needs to run on the Apple Silicon architecture (not with Rosetta 2). You can read more in [Apple's Information Property List documentation](https://developer.apple.com/documentation/bundleresources/information-property-list).
 
 ## Step 5: Run the Application
-Now that you have created the app structure and edited the `Info.plist` file, you can run your application. Open Finder, navigate to the `Applications` directory, and double-click on `App_Name.app`. 
 
+Now that you have created the app structure and edited the `Info.plist` file, you can run your application. Open Finder, navigate to the `Applications` directory, and double-click on `App_Name.app`.
 
 References:
+
 - [Converting a Shell Script Into a *.app File](https://stackoverflow.com/questions/30792569/converting-a-shell-script-into-a-app-file#:~:text=Where%20the%20file,MyScript)
 - [The Importance of Info.plist in iOS Development](https://medium.com/@kalidoss.shanmugam/the-importance-of-info-plist-in-ios-development-fa76c238a243)

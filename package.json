@@ -3,9 +3,17 @@
   "private": true,
   "scripts": {
     "lint:css": "stylelint \"assets/css/extended/**/*.css\"",
-    "lint:css:fix": "stylelint \"assets/css/extended/**/*.css\" --fix"
+    "lint:css:fix": "stylelint \"assets/css/extended/**/*.css\" --fix",
+    "lint": "bun run lint:css && bun run lint:md",
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "markdownlint-cli2 --fix",
+    "test:a11y": "pa11y-ci",
+    "prepare": "lefthook install || true"
   },
   "devDependencies": {
+    "lefthook": "^2.2.1",
+    "markdownlint-cli2": "^0.23.3",
+    "pa11y-ci": "^5.0.0",
     "stylelint": "^17.16.0",
     "stylelint-config-standard": "^40.0.0"
   }

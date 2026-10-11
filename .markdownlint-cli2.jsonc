@@ -1,0 +1,14 @@
+{
+  "globs": ["content/**/*.md", "SECURITY.md"],
+  "ignores": ["node_modules/**", "themes/**", "public/**"],
+  "config": {
+    "default": true,
+    // Hugo renders the front matter title as the page H1, so posts start at H2
+    "MD041": false,
+    // Posts use inline HTML (forms, details, images) and long prose lines
+    "MD013": false,
+    "MD033": false,
+    // Repeated step names are fine under different parent headings
+    "MD024": { "siblings_only": true }
+  }
+}
