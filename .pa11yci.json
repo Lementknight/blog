@@ -3,7 +3,9 @@
     "standard": "WCAG2AA",
     "timeout": 30000,
     "chromeLaunchConfig": {
-      "args": ["--no-sandbox"]
+      "args": [
+        "--no-sandbox"
+      ]
     }
   },
   "urls": [
@@ -14,6 +16,7 @@
     "http://localhost:8080/aboutme/",
     "http://localhost:8080/archive/",
     "http://localhost:8080/contact/",
-    "http://localhost:8080/tags/"
+    "http://localhost:8080/tags/",
+    "http://localhost:8080/search/"
   ]
 }

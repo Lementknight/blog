@@ -459,10 +459,25 @@ footer.footer { border-top: 1px solid var(--border); }
     margin-top: 1.5rem;
 }
 
+/* The theme's --secondary is 4.25:1 on the light "Prev/Next" box */
+.paginav .title {
+    color: var(--content);
+}
+
+/* The post header below already has a divider, so none here. Links are centred
+   in their 44px touch target so they line up with the chevrons. */
 .breadcrumbs {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumbs a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
 }
 
 /* Tag chips: centred label, no underline, even gaps when they wrap */

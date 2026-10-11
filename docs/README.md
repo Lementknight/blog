@@ -199,7 +199,6 @@ params:
 
 ## 🔐 Security
 
-- **CodeQL Scanning**: Enabled via GitHub Actions
 - **No Secrets in Repo**: Firebase config in `.firebaserc` (gitignored)
 - **Content Security**: Posts are Markdown-based, no arbitrary code execution
 
