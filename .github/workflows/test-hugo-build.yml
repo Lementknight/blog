@@ -1,7 +1,10 @@
 name: Test Hugo Build
+
+# All checks run in Dagger (see .dagger/src/index.ts); reproduce locally with
+#   dagger call ci --skip-links
 on:
   pull_request:
-    branches: 
+    branches:
       - main
     paths:
       - 'content/**'
@@ -13,6 +16,9 @@ on:
       - 'i18n/**'
       - 'archetypes/**'
       - 'resources/**'
+      - 'scripts/**'
+      - '.dagger/**'
+      - 'dagger.json'
       - 'hugo.yml'
       - 'hugo.yaml'
       - 'hugo.toml'
@@ -22,15 +28,20 @@ on:
       - 'go.mod'
       - 'go.sum'
       - 'package.json'
-      - 'package-lock.json'
       - 'bun.lock'
+      - 'SECURITY.md'
       - '.stylelintrc.json'
       - '.markdownlint-cli2.jsonc'
+      - '.codespellrc'
+      - 'lychee.toml'
+      - '.pa11yci.json'
+      - '.pa11yci-light.json'
       - '.github/workflows/test-hugo-build.yml'
       - '.github/workflows/firebase-hosting-pull-request.yml'
   push:
     branches:
       - test/*
+      - ci/*
       - feature/*
       - develop
     paths:
@@ -43,6 +54,9 @@ on:
       - 'i18n/**'
       - 'archetypes/**'
       - 'resources/**'
+      - 'scripts/**'
+      - '.dagger/**'
+      - 'dagger.json'
       - 'hugo.yml'
       - 'hugo.yaml'
       - 'hugo.toml'
@@ -52,7 +66,14 @@ on:
       - 'go.mod'
       - 'go.sum'
       - 'package.json'
-      - 'package-lock.json'
+      - 'bun.lock'
+      - 'SECURITY.md'
+      - '.stylelintrc.json'
+      - '.markdownlint-cli2.jsonc'
+      - '.codespellrc'
+      - 'lychee.toml'
+      - '.pa11yci.json'
+      - '.pa11yci-light.json'
       - '.github/workflows/test-hugo-build.yml'
       - '.github/workflows/firebase-hosting-pull-request.yml'
 
@@ -62,154 +83,15 @@ permissions:
 jobs:
   test-build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.160.1
-      GO_VERSION: 1.26.2
-      BUN_VERSION: latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          submodules: recursive  # Fetch Hugo themes
-          fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+          submodules: recursive  # Hugo theme
 
-      - name: Setup Go
-        uses: actions/setup-go@v6
+      - name: Lint, spell check, build, validate and accessibility test
+        uses: dagger/dagger-for-github@v8.4.1
         with:
-          go-version: ${{ env.GO_VERSION }}
-          cache: false
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      
-      - name: Create directory for user-specific executable files
-        run: |
-          mkdir -p "${HOME}/.local"
-      
-      - name: Install Hugo
-        run: |
-          curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-          mkdir "${HOME}/.local/hugo"
-          tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-          rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
-      
-      - name: Verify Hugo installation
-        run: |
-          echo "Hugo: $(hugo version)"
-          echo "Go: $(go version)"
-          echo "Bun: $(bun --version)"
-      
-      - name: Install JavaScript dependencies
-        run: |
-          [[ -f bun.lock || -f bun.lockb ]] && bun install --frozen-lockfile || true
-
-      - name: Lint CSS and Markdown
-        run: bun run lint
-      
-      - name: Configure Git
-        run: |
-          git config core.quotepath false
-      
-      - name: Cache restore
-        id: cache-restore
-        uses: actions/cache/restore@v5
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: hugo-test-${{ github.run_id }}-${{ github.sha }}
-          restore-keys: |
-            hugo-test-${{ github.run_id }}-
-            hugo-test-
-            hugo-
-      
-      - name: Test Hugo build (production)
-        run: |
-          echo "Testing Hugo build with production environment..."
-          hugo \
-            --gc \
-            --minify \
-            --environment production \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "/" \
-            --destination public-test
-          
-          echo "✅ Production build successful"
-      
-      - name: Test Hugo build (development) 
-        run: |
-          echo "Testing Hugo build with development environment..."
-          hugo \
-            --buildDrafts \
-            --buildFuture \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "/" \
-            --destination public-dev-test
-          
-          echo "✅ Development build successful"
-      
-      - name: Validate generated content
-        run: |
-          echo "Validating generated content..."
-          
-          # Check that essential files were generated
-          if [ ! -f "public-test/index.html" ]; then
-            echo "❌ Error: index.html not generated"
-            exit 1
-          fi
-          
-          # Check that CSS files exist
-          if [ ! -d "public-test/assets" ]; then
-            echo "❌ Error: assets directory not generated"
-            exit 1
-          fi
-          
-          # Check that static files were copied
-          if [ ! -f "public-test/favicon.ico" ]; then
-            echo "❌ Error: favicon.ico not copied"
-            exit 1
-          fi
-          
-          echo "✅ Content validation successful"
-
-      - name: Check for empty non-draft posts
-        run: |
-          echo "Checking for empty posts..."
-          empty_posts=()
-          for file in content/posts/*.md; do
-            [ -f "$file" ] || continue
-            # Skip drafts
-            if grep -qE '^draft:\s*true' "$file"; then
-              continue
-            fi
-            # Extract body after front matter (between --- delimiters)
-            body=$(awk '/^---$/{n++; next} n>=2' "$file" | sed '/^[[:space:]]*$/d' | sed '/^{{.*}}$/d')
-            if [ -z "$body" ]; then
-              empty_posts+=("$file")
-            fi
-          done
-          if [ ${#empty_posts[@]} -gt 0 ]; then
-            echo "❌ Found non-draft posts with no content:"
-            printf '  - %s\n' "${empty_posts[@]}"
-            exit 1
-          fi
-          echo "✅ No empty posts found"
-
-      - name: Cache save
-        id: cache-save
-        uses: actions/cache/save@v5
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
-      
-      - name: Upload build artifacts (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: hugo-build-logs
-          path: |
-            public-test/
-            public-dev-test/
-          retention-days: 3
+          version: "0.21.10"
+          verb: call
+          args: ci --skip-links

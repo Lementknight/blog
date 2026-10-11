@@ -16,3 +16,6 @@ debug:
 
 lint:
 	bun run lint
+
+ci:
+	dagger call ci --skip-links
