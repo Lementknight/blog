@@ -25,3 +25,6 @@ hugo.linux
 # Claude
 .claude
 .vscode
+
+# JavaScript tooling
+node_modules

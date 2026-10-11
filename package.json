@@ -1,0 +1,12 @@
+{
+  "name": "blog",
+  "private": true,
+  "scripts": {
+    "lint:css": "stylelint \"assets/css/extended/**/*.css\"",
+    "lint:css:fix": "stylelint \"assets/css/extended/**/*.css\" --fix"
+  },
+  "devDependencies": {
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}

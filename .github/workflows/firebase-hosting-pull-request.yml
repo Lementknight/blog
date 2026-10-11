@@ -121,6 +121,9 @@ jobs:
       - name: Install JavaScript dependencies
         run: |
           [[ -f bun.lock || -f bun.lockb ]] && bun install --frozen-lockfile || true
+
+      - name: Lint CSS
+        run: bun run lint:css
       
       - name: Configure Git
         run: |

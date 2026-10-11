@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "assets/css/extended/chroma-*.css"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "import-notation": null,
+    "media-feature-range-notation": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreKeywords": [
+          "BlinkMacSystemFont",
+          "Arial"
+        ]
+      }
+    ]
+  }
+}

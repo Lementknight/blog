@@ -13,3 +13,6 @@ new_post:
 
 debug:
 	rm -rf public && hugo server --disableFastRender --noHTTPCache
+
+lint:
+	bun run lint:css
