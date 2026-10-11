@@ -1,4 +1,7 @@
-# About Me
+---
+title: "About Me"
+url: "/aboutme/"
+---
 
 ## Bio
 
