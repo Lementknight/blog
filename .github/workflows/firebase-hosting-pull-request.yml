@@ -47,7 +47,7 @@ permissions:
 jobs:
   build_and_preview:
     # Only run if this is from the same repository and build test passes
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    if: false  # throwaway test PR: no preview deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
